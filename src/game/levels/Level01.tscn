@@ -1,7 +1,10 @@
-[gd_scene load_steps=56 format=2]
+[gd_scene load_steps=60 format=2]
 
 [ext_resource path="res://assets/textures/Tileset/tilesheet_complete.png" type="Texture" id=1]
 [ext_resource path="res://src/game/entities/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/textures/entities/turret.png" type="Texture" id=3]
+[ext_resource path="res://src/game/levels/Level01.gd" type="Script" id=4]
+[ext_resource path="res://src/game/levels/Enemy.gd" type="Script" id=5]
 
 [sub_resource type="ConvexPolygonShape2D" id=30]
 points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
@@ -517,7 +520,11 @@ points = PoolVector2Array( 0, 0, 64, 0, 44.1592, 37.75, 0, 64 )
 } ]
 1/z_index = 0
 
+[sub_resource type="RectangleShape2D" id=82]
+extents = Vector2( 24, 49 )
+
 [node name="Level01" type="Node"]
+script = ExtResource( 4 )
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource( 29 )
@@ -534,3 +541,19 @@ position = Vector2( 66, 355 )
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 current = true
+
+[node name="Enemy" type="KinematicBody2D" parent="."]
+position = Vector2( 486, 405 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Enemy"]
+position = Vector2( 5.25, -6.25 )
+scale = Vector2( 1.43939, 1.5 )
+texture = ExtResource( 3 )
+
+[node name="Hitbox" type="CollisionShape2D" parent="Enemy"]
+position = Vector2( 5, -4 )
+shape = SubResource( 82 )

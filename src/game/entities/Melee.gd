@@ -17,5 +17,5 @@ func disable():
 	collision.disabled = true
 
 func _on_Area2D_body_entered(body):
-	if (body.name != "Player"):
+	if (body.name == "Enemy"):
 		body.take_damage()

@@ -11,7 +11,7 @@ const SLOPE_THRESHOLD := deg2rad(46)
 
 export (float) var ACCELERATION:float = 60.0
 export (float) var H_SPEED_LIMIT:float = 600.0
-export (int) var jump_speed = 500
+export (int) var jump_speed = 450
 export (float) var FRICTION_WEIGHT:float = 0.1
 export (int) var gravity = 10
 
@@ -59,8 +59,7 @@ func is_near_wall():
 	
 func move_and_fall(slow_fall: bool):
 	
-	velocity.y = velocity.y + gravity * 2
-	
+	velocity.y = velocity.y + gravity
 #	if slow_fall:
 	velocity.y = clamp(velocity.y, -jump_speed, 100)
 		

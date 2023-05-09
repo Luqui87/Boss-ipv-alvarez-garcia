@@ -10,7 +10,7 @@ radius = 27.0
 height = 16.0
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 145.191, 324.389 )
+extents = Vector2( 281.633, 291.429 )
 
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( 34, 33 )
@@ -29,23 +29,18 @@ shape = SubResource( 1 )
 
 [node name="Melee" type="Sprite" parent="."]
 visible = false
-position = Vector2( 59, -1 )
-rotation = 0.474761
-scale = Vector2( 0.101667, 0.095 )
+position = Vector2( 50, 0 )
+scale = Vector2( 0.0816667, 0.0583333 )
 texture = ExtResource( 3 )
 script = ExtResource( 4 )
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="Area2D" type="Area2D" parent="Melee"]
+position = Vector2( -177.551, 248.571 )
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Melee/Area2D"]
-position = Vector2( 30.8314, -27.0404 )
-rotation = 1.09258
+position = Vector2( 165.306, -231.429 )
 shape = SubResource( 2 )
-disabled = true
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 rotation = -1.5708

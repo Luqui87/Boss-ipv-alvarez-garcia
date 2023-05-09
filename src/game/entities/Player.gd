@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 onready var Meleee = $Melee
+onready var body = $Sprite
 
 signal hit(value)
 
@@ -67,6 +68,12 @@ func move_and_fall(slow_fall: bool):
 
 func set_direction():
 	$RayCast2D.rotation_degrees = 90 * (- h_movement_direction)
+	if h_movement_direction < 0:
+		Meleee.flip_h = true
+		Meleee.position.x = -55
+	elif h_movement_direction > 0:
+		Meleee.flip_h = false
+		Meleee.position.x = 47
 
 func _process(delta):
 	_process_input()

@@ -4,6 +4,7 @@ onready var Meleee = $Melee
 onready var body = $Sprite
 
 signal hit(value)
+signal dead
 
 var health : int = 5
 var knockback : bool = false
@@ -15,7 +16,7 @@ const SLOPE_THRESHOLD := deg2rad(46)
 
 export (float) var ACCELERATION:float = 60.0
 export (float) var H_SPEED_LIMIT:float = 600.0
-export (int) var jump_speed = 450
+export (int) var jump_speed = 400
 export (float) var FRICTION_WEIGHT:float = 0.1
 export (int) var gravity = 10
 
@@ -34,8 +35,8 @@ func _process_input():
 		velocity.x = clamp(velocity.x + (h_movement_direction * ACCELERATION), -H_SPEED_LIMIT, H_SPEED_LIMIT)
 		set_direction()
 	elif knockback :
-		velocity.x = -500
-		velocity.y = -500
+		velocity.x = -400
+		velocity.y = -200
 		knockback = false
 	else:
 		velocity.x = lerp(velocity.x, 0, FRICTION_WEIGHT) if abs(velocity.x) > 1 else 0
@@ -47,18 +48,26 @@ func _process_input():
 	if jump && on_floor:
 		velocity.y -= jump_speed
 		
+	if jump && is_near_wall():
+		velocity.y -= jump_speed *2
+		
 	#Player attack
 	var attack: bool = Input.is_action_just_pressed("attack")
 	if attack:
 		_play_animation("attack")
 	
 	#Player onWall
-	if is_near_wall() && !is_on_floor():
+	if is_near_wall() && !on_floor:
 		if Input.is_action_just_pressed("jump"):
 			velocity.x = 500 * -direction
 			velocity.y -= jump_speed 
 		move_and_fall(true)
+	
+	if !on_floor && $Timer.is_stopped():
+		$Timer.start()
 		
+	elif on_floor || is_near_wall():
+		$Timer.stop()
 
 func is_near_wall():
 	return $RayCast2D.is_colliding()
@@ -89,8 +98,13 @@ func take_damage():
 	knockback = true
 	health -= 1
 	if (health == 0):
-		queue_free()
+		emit_signal("dead")
 
 func _play_animation(anim_name: String) -> void:
 	if $AnimationPlayer.has_animation(anim_name):
 		$AnimationPlayer.play(anim_name)
+
+
+func _on_Timer_timeout():
+	emit_signal("dead")
+

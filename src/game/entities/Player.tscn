@@ -70,7 +70,7 @@ tracks/1/keys = {
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( 34, 33 )
 collision_layer = 2
-collision_mask = 5
+collision_mask = 3
 script = ExtResource( 2 )
 
 [node name="Body" type="Sprite" parent="."]
@@ -108,4 +108,9 @@ reset_on_save = false
 anims/RESET = SubResource( 3 )
 anims/attack = SubResource( 4 )
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
 [connection signal="body_entered" from="Melee/Area2D" to="Melee" method="_on_Area2D_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

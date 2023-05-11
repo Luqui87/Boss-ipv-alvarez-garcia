@@ -5,6 +5,9 @@ onready var body = $Sprite
 
 signal hit(value)
 
+var health : int = 5
+var knockback : bool = false
+
 const FLOOR_NORMAL := Vector2.UP  # Igual a Vector2(0, -1)
 const SNAP_DIRECTION := Vector2.UP
 const SNAP_LENGHT := 32.0
@@ -25,13 +28,15 @@ var snap_vector:Vector2 = SNAP_DIRECTION * SNAP_LENGHT
 
 func _process_input():
 	
-	print(is_near_wall())
-	
 	#Player movement
 	h_movement_direction = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))
 	if h_movement_direction != 0:
 		velocity.x = clamp(velocity.x + (h_movement_direction * ACCELERATION), -H_SPEED_LIMIT, H_SPEED_LIMIT)
 		set_direction()
+	elif knockback :
+		velocity.x = -500
+		velocity.y = -500
+		knockback = false
 	else:
 		velocity.x = lerp(velocity.x, 0, FRICTION_WEIGHT) if abs(velocity.x) > 1 else 0
 		
@@ -45,7 +50,7 @@ func _process_input():
 	#Player attack
 	var attack: bool = Input.is_action_just_pressed("attack")
 	if attack:
-		Meleee.hit()
+		_play_animation("attack")
 	
 	#Player onWall
 	if is_near_wall() && !is_on_floor():
@@ -80,6 +85,12 @@ func _process(delta):
 	velocity.y += gravity
 	velocity = move_and_slide_with_snap(velocity, snap_vector, FLOOR_NORMAL, true, 4, SLOPE_THRESHOLD)
 	
+func take_damage():
+	knockback = true
+	health -= 1
+	if (health == 0):
+		queue_free()
 
-
-
+func _play_animation(anim_name: String) -> void:
+	if $AnimationPlayer.has_animation(anim_name):
+		$AnimationPlayer.play(anim_name)

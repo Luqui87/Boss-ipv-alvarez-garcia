@@ -697,7 +697,8 @@ __meta__ = {
 }
 
 [node name="Enemy2" parent="." instance=ExtResource( 3 )]
-position = Vector2( 1512, 659 )
+position = Vector2( 1393, 780 )
+scale = Vector2( -1, 1 )
 __meta__ = {
 "_edit_group_": true
 }

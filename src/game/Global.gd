@@ -2,4 +2,6 @@ extends Node
 
 var level_start: bool = true
 var spawn_point :Vector2
+var paused = false
 
+var health = 5

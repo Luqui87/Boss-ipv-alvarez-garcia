@@ -15,5 +15,6 @@ func _ready():
 func on_player_dead():
 	Global.level_start = false
 	get_tree().call_deferred("reload_current_scene")
+	Global.health = 5
 	
 

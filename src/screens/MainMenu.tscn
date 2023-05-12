@@ -17,13 +17,11 @@ anchor_bottom = 1.0
 [node name="Background" type="TextureRect" parent="Container"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -2.0
-margin_top = 2.0
-margin_right = 766.0
-margin_bottom = 426.0
-rect_scale = Vector2( 0.57169, 0.583412 )
+margin_right = 768.0
+margin_bottom = 424.0
 mouse_filter = 2
 texture = ExtResource( 3 )
+expand = true
 
 [node name="Buttons" type="VBoxContainer" parent="Container"]
 anchor_top = 1.0

@@ -1,8 +1,8 @@
 [gd_scene load_steps=70 format=2]
 
 [ext_resource path="res://assets/textures/Tileset/tilesheet_complete.png" type="Texture" id=1]
-[ext_resource path="res://src/game/entities/Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/game/entities/MeleeEnemy.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/game/entities/player/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/game/entities/enemies/MeleeEnemy.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/game/levels/Level01.gd" type="Script" id=4]
 [ext_resource path="res://src/game/enviroment/Plataform.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/game/enviroment/Checkpoint.tscn" type="PackedScene" id=6]
@@ -684,7 +684,10 @@ tracks/0/keys = {
 script = ExtResource( 4 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 69, 397 )
+position = Vector2( 3417, 389 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 offset = Vector2( 0, -100 )

@@ -6,4 +6,4 @@ func take_damage():
 
 func _on_DamageBox_body_entered(body):
 	print(body)
-	body.take_damage()
+	body._take_damage()

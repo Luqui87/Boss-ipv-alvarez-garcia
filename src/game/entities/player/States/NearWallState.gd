@@ -1,5 +1,8 @@
 extends AbstractState
 
+func enter():
+	character._play_animation("wallSlide", false)
+
 func update(delta:float) -> void:
 
 	character._handle_move_input()

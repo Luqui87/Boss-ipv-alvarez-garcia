@@ -2,6 +2,8 @@ extends AbstractState
 
 # Initialize the state. E.g. change the animation
 func enter() -> void:
+	character._play_animation("jump",false)
+	character.emit_signal("grounded_change", false)
 	if (character.is_near_wall()):
 		character.handle_wall_jump()
 	else:
@@ -19,11 +21,18 @@ func update(delta:float) -> void:
 	if character.is_near_wall():
 			emit_signal("finished","nearWall")
 	elif character.is_on_floor():
+		character.emit_signal("grounded_change",true)
 		if character.move_direction != 0:
 			emit_signal("finished","move")
 		else:
+			character._play_animation("landing",false)
 			emit_signal("finished","idle")
-	print("jump")
+		
 
 func _on_animation_finished(anim_name: String) -> void:
-	return
+	pass
+
+
+func _on_BodyAnimations_animation_finished(anim_name):
+	if (anim_name == "landing"):
+		emit_signal("finished", "idle")

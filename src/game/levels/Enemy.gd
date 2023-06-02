@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-func take_damage():
+func _take_damage():
 	$EnemyAnim.play("Sleep")
 
 

@@ -1,6 +1,11 @@
 extends AbstractState
 
+func enter():
+	character._play_animation("idle")
+
 func handle_input(event: InputEvent) -> void:
+	if event.is_action_pressed("attack"):
+		character._handle_attack()
 	if event.is_action_pressed("move_left") || event.is_action_pressed("move_right"):
 		emit_signal("finished", "move")
 	elif event.is_action_pressed("jump") && character.is_on_floor():
@@ -10,10 +15,10 @@ func handle_input(event: InputEvent) -> void:
 func update(delta: float) -> void:
 	character._handle_deacceleration()
 	character._apply_movement()
-#	if character.is_on_floor():
-#		character._play_animation("idle")
-#	else:
-#		character._play_animation("jump", false)
+	if character.is_on_floor() && (character._is_animation_playing("jump")):
+		character._play_animation("idle") 
+	elif !character.is_on_floor() && character._is_animation_playing("idle"):
+		character._play_animation("jump")
 
 
 func handle_event(event: String, value = null) -> void:

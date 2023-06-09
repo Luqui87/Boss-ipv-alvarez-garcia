@@ -16,6 +16,10 @@ signal grounded_change(is_grounded)
 onready var state_machine : Node = $StateMachine
 onready var body: Sprite = $Body
 onready var wall_check : RayCast2D = $WallCheck
+onready var floorCast1 : RayCast2D = $floorCast1
+onready var floorCast2 : RayCast2D = $floorCast2
+onready var floorCast3 : RayCast2D = $floorCast3
+
 
 #onready var floor_raycasts: Array = $FloorRaycasts.get_children()
 onready var body_animations: AnimationPlayer = $BodyAnimations
@@ -99,17 +103,17 @@ func _remove():
 	collision_layer = 0
 
 
-#func is_on_floor()->bool:
-#	var is_colliding:bool = .is_on_floor()
-#	for raycast in floor_raycasts:
-#		raycast.force_raycast_update()
-#		is_colliding = is_colliding || raycast.is_colliding()
-#	return is_colliding
-
-
 
 func is_near_wall():
 	return wall_check.is_colliding()
+	
+func is_sliding():
+	if  floorCast1.is_colliding() && !floorCast2.is_colliding() && floorCast3.is_colliding():
+		return 1
+	if !floorCast1.is_colliding() && floorCast2.is_colliding() && floorCast3.is_colliding():
+		return -1
+	else:
+		return 0 
 	
 func handle_wall_jump():
 	snap_vector = Vector2.ZERO
@@ -126,6 +130,7 @@ func _process(delta):
 		$FallTimer.start()
 	elif !$FallTimer.is_stopped() && (is_on_floor() || is_near_wall()) :
 		$FallTimer.stop()
+	
 
 func _on_Timer_timeout():
 	emit_signal("dead")

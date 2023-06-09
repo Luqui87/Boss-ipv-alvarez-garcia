@@ -7,9 +7,10 @@ func update(delta:float) -> void:
 
 	character._handle_move_input()
 	character.move_and_fall(true)
-	if character.is_on_floor() || !character.is_near_wall():
+	if character.is_on_floor() :
 		emit_signal("finished", "idle")
-	print("wall")
+	elif !character.is_near_wall():
+		emit_signal("finished", "move")
 
 func _on_animation_finished(anim_name: String) -> void:
 	return

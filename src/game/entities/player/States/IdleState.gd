@@ -15,10 +15,12 @@ func handle_input(event: InputEvent) -> void:
 func update(delta: float) -> void:
 	character._handle_deacceleration()
 	character._apply_movement()
-	if character.is_on_floor() && (character._is_animation_playing("jump")):
+	if character.is_on_floor() && (character._is_animation_playing("falling")):
 		character._play_animation("idle") 
 	elif !character.is_on_floor() && character._is_animation_playing("idle"):
-		character._play_animation("jump")
+		character._play_animation("falling")
+	if character.is_sliding() != 0:
+		emit_signal("finished","slide")
 
 
 func handle_event(event: String, value = null) -> void:

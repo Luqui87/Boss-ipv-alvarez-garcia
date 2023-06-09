@@ -6,7 +6,8 @@ func _ready() -> void:
 		"move": $Move,
 		"jump": $Jump,
 		"nearWall" : $NearWall,
-		"hurt" : $Hurt
+		"hurt" : $Hurt,
+		"slide": $Slide
 	}
 
 

@@ -2,9 +2,9 @@ extends AbstractState
 
 # Initialize the state. E.g. change the animation
 func enter() -> void:
-	character._play_animation("jump",false)
 	character.emit_signal("grounded_change", false)
 	if (character.is_near_wall()):
+		character._play_animation("wallJump",false)
 		character.handle_wall_jump()
 	else:
 		character._play_animation("jump",false)

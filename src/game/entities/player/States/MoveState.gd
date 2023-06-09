@@ -6,13 +6,15 @@ func enter():
 func update(delta):
 	character._handle_move_input()
 	character._apply_movement()
+	if character.is_sliding() != 0:
+		emit_signal("finished","slide")
 	if character.move_direction == 0:
 		emit_signal("finished", "idle")
 	else:
-		if character.is_on_floor() && (character._is_animation_playing("jump")):
+		if character.is_on_floor() && (character._is_animation_playing("falling")):
 			character._play_animation("move")
 		elif !character.is_on_floor() && character._is_animation_playing("move"):
-			character._play_animation("jump")
+			character._play_animation("falling")
 		elif character.is_near_wall():
 			emit_signal("finished","nearWall")
 			

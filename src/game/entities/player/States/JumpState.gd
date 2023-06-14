@@ -29,6 +29,10 @@ func update(delta:float) -> void:
 			emit_signal("finished","idle")
 		
 
+func handle_input(event: InputEvent) -> void:
+	if event.is_action_pressed("attack"):
+		character._handle_attack()
+
 func _on_animation_finished(anim_name: String) -> void:
 	pass
 

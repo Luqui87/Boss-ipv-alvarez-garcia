@@ -108,9 +108,9 @@ func is_near_wall():
 	return wall_check.is_colliding()
 	
 func is_sliding():
-	if  floorCast1.is_colliding() && !floorCast2.is_colliding() && floorCast3.is_colliding():
+	if  !is_near_wall() && floorCast1.is_colliding() && !floorCast2.is_colliding() && floorCast3.is_colliding():
 		return 1
-	if !floorCast1.is_colliding() && floorCast2.is_colliding() && floorCast3.is_colliding():
+	if !is_near_wall() && !floorCast1.is_colliding() && floorCast2.is_colliding() && floorCast3.is_colliding():
 		return -1
 	else:
 		return 0 
@@ -148,7 +148,10 @@ func _play_animation(animation_name:String, should_restart:bool = true, playback
 		body_animations.play(animation_name)
 
 func _handle_attack():
-	_play_animation("attack")	
+	if is_on_floor():
+		_play_animation("attack")	
+	else:
+		_play_animation("jumpAttack")
 	var meleePosition =  $Body/Melee/MeleeShape.position.x 
 	$Body/Melee/MeleeShape.position.x = abs(meleePosition) * (last_direction)
 	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://assets/textures/entities/player/adventurer-v1.5-Sheet.png" type="Texture" id=1]
 [ext_resource path="res://src/game/entities/player/Player.gd" type="Script" id=2]
@@ -11,7 +11,7 @@
 [ext_resource path="res://src/game/entities/player/States/NearWallState.gd" type="Script" id=9]
 
 [sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 26.4752, 38.3964 )
+extents = Vector2( 35.7998, 38.3964 )
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 19.0
@@ -142,6 +142,35 @@ tracks/0/keys = {
 "values": [ 14, 15, 16, 17, 18, 19, 20, 21, 22, 23 ]
 }
 
+[sub_resource type="Animation" id=16]
+resource_name = "jumpAttack"
+length = 0.28
+step = 0.07
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.07, 0.14, 0.21 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 96, 97, 98, 99 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Body/Melee/MeleeShape:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.07, 0.28 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+
 [sub_resource type="Animation" id=9]
 resource_name = "move"
 length = 0.4
@@ -249,7 +278,7 @@ scale = Vector2( 2.00187, 2.01822 )
 texture = ExtResource( 1 )
 hframes = 7
 vframes = 16
-frame = 25
+frame = 99
 
 [node name="Melee" type="Area2D" parent="Body"]
 position = Vector2( 0.529661, 1.54824 )
@@ -258,7 +287,7 @@ collision_layer = 0
 collision_mask = 4
 
 [node name="MeleeShape" type="CollisionShape2D" parent="Body/Melee"]
-position = Vector2( 36.4057, -10.0636 )
+position = Vector2( 45.7303, -10.0636 )
 shape = SubResource( 6 )
 disabled = true
 
@@ -297,6 +326,7 @@ anims/falling = SubResource( 14 )
 anims/hurt = SubResource( 10 )
 anims/idle = SubResource( 5 )
 anims/jump = SubResource( 7 )
+anims/jumpAttack = SubResource( 16 )
 anims/move = SubResource( 9 )
 anims/slide = SubResource( 15 )
 anims/wallJump = SubResource( 13 )

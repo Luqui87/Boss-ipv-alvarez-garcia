@@ -11,7 +11,7 @@
 [ext_resource path="res://src/game/entities/player/States/NearWallState.gd" type="Script" id=9]
 
 [sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 35.7998, 38.3964 )
+extents = Vector2( 46.6231, 38.3964 )
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 19.0
@@ -283,11 +283,11 @@ frame = 99
 [node name="Melee" type="Area2D" parent="Body"]
 position = Vector2( 0.529661, 1.54824 )
 scale = Vector2( 0.5, 0.4 )
-collision_layer = 0
-collision_mask = 4
+collision_layer = 8
+collision_mask = 0
 
 [node name="MeleeShape" type="CollisionShape2D" parent="Body/Melee"]
-position = Vector2( 45.7303, -10.0636 )
+position = Vector2( 34.907, -10.0636 )
 shape = SubResource( 6 )
 disabled = true
 
@@ -298,13 +298,13 @@ shape = SubResource( 1 )
 position = Vector2( -13.3333, 31.3333 )
 scale = Vector2( 0.333333, 0.333333 )
 enabled = true
-cast_to = Vector2( -30, 8 )
+cast_to = Vector2( -18.0001, 16.0001 )
 
 [node name="floorCast2" type="RayCast2D" parent="."]
 position = Vector2( 13.3333, 30.6667 )
 scale = Vector2( 0.333333, 0.333333 )
 enabled = true
-cast_to = Vector2( 20, 10 )
+cast_to = Vector2( 16.0001, 15.9999 )
 
 [node name="floorCast3" type="RayCast2D" parent="."]
 position = Vector2( 0, 34 )
@@ -332,11 +332,7 @@ anims/slide = SubResource( 15 )
 anims/wallJump = SubResource( 13 )
 anims/wallSlide = SubResource( 11 )
 
-[node name="FallTimer" type="Timer" parent="."]
-wait_time = 3.0
-one_shot = true
-
 [connection signal="hit" from="." to="StateMachine" method="_on_Player_hit"]
+[connection signal="area_entered" from="Body/Melee" to="." method="_on_Melee_area_entered"]
 [connection signal="body_entered" from="Body/Melee" to="." method="_on_Melee_body_entered"]
 [connection signal="animation_finished" from="BodyAnimations" to="StateMachine/Jump" method="_on_BodyAnimations_animation_finished"]
-[connection signal="timeout" from="FallTimer" to="." method="_on_Timer_timeout"]

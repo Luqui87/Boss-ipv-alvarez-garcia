@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Sword_Pixel_art_-_Radin.png-adb3037c6426e31c983d48ba9019abd2.stex"
+path="res://.import/Pixel (1).png-5600bb5c596fd9168535bf9e7476da5b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/entities/Sword_Pixel_art_-_Radin.png"
-dest_files=[ "res://.import/Sword_Pixel_art_-_Radin.png-adb3037c6426e31c983d48ba9019abd2.stex" ]
+source_file="res://assets/textures/UI/GUI/Pixel (1).png"
+dest_files=[ "res://.import/Pixel (1).png-5600bb5c596fd9168535bf9e7476da5b.stex" ]
 
 [params]
 

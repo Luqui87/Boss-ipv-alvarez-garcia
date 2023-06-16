@@ -40,6 +40,7 @@ var move_direction: int = 0
 var stop_on_slope: bool = true
 var last_direction = 1
 var attacking : bool
+var on_transporter : bool = false
 
 func _ready() -> void:
 	state_machine._set_character(self)
@@ -67,10 +68,12 @@ func _handle_deacceleration() -> void:
 
 func _apply_movement():
 	velocity.y += gravity
+	if on_transporter :
+		velocity.x += 20
 	velocity = move_and_slide_with_snap(velocity, snap_vector, FLOOR_NORMAL, stop_on_slope, 4, SLOPE_THRESHOLD)
 	if is_on_floor() && snap_vector == Vector2.ZERO:
 		snap_vector = SNAP_DIRECTION * SNAP_LENGTH
-
+	
 
 func move_and_fall(slow_fall: bool):
 
@@ -124,15 +127,8 @@ func handle_wall_jump():
 	wall_check.rotation_degrees = 90 * ( last_direction)
 	
 	
-	
-func _process(delta):
-	if !is_on_floor() && $FallTimer.is_stopped():
-		$FallTimer.start()
-	elif !$FallTimer.is_stopped() && (is_on_floor() || is_near_wall()) :
-		$FallTimer.stop()
-	
 
-func _on_Timer_timeout():
+func _handle_dead():
 	emit_signal("dead")
 
 
@@ -158,3 +154,19 @@ func _handle_attack():
 
 func _on_Melee_body_entered(body):
 	body._take_damage()
+
+
+func _on_Melee_area_entered(area):
+	if (!is_on_floor()):
+		_play_animation("jump",false)
+		velocity.y = -jump_speed
+		snap_vector = Vector2.ZERO
+		$Body/Melee/MeleeShape.disabled = true
+
+func _handle_transporter(direction):
+	on_transporter = true
+
+func _handle_exit_transporter():
+	on_transporter = false
+
+

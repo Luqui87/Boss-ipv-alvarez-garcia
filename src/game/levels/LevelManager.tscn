@@ -3,8 +3,8 @@
 [ext_resource path="res://src/game/levels/Level01.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/game/levels/LevelManager.gd" type="Script" id=2]
 [ext_resource path="res://theme.tres" type="Theme" id=3]
-[ext_resource path="res://assets/textures/UI/GUI/hud_heartFull.png" type="Texture" id=4]
-[ext_resource path="res://assets/textures/UI/GUI/hud_heartEmpty.png" type="Texture" id=5]
+[ext_resource path="res://assets/textures/UI/GUI/Pixel (4).png" type="Texture" id=4]
+[ext_resource path="res://assets/textures/UI/GUI/Pixel (2).png" type="Texture" id=5]
 
 [sub_resource type="Theme" id=1]
 
@@ -21,8 +21,8 @@ mouse_filter = 2
 theme = ExtResource( 3 )
 
 [node name="ProgressBar" type="TextureProgress" parent="UI/GUI"]
-margin_right = 70.0
-margin_bottom = 65.0
+margin_right = 497.0
+margin_bottom = 274.0
 size_flags_horizontal = 3
 max_value = 5.0
 value = 5.0

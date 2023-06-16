@@ -11,10 +11,10 @@ func _ready():
 	player.global_position = Global.spawn_point
 	
 	player.connect("dead",self,"on_player_dead")
+	player.connect("grounded_change", $Player/Camera2D, "_on_player_grounded_update")
 	
 func on_player_dead():
 	Global.level_start = false
 	get_tree().call_deferred("reload_current_scene")
 	Global.health = 5
 	
-

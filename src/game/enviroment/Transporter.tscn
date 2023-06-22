@@ -1,17 +1,17 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/textures/enviroment/Factory/4 Animated objects/Transporter1.png" type="Texture" id=1]
 [ext_resource path="res://src/game/enviroment/Transporter.gd" type="Script" id=2]
-[ext_resource path="res://assets/textures/enviroment/Factory/4 Animated objects/Transporter2.png" type="Texture" id=3]
+[ext_resource path="res://src/game/enviroment/transporterMiddle.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/textures/enviroment/Factory/4 Animated objects/Transporter3.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 96, 18.25 )
+extents = Vector2( 761, 23.125 )
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=4]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -20,10 +20,10 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 1 ]
+"values": [ 3 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite2:frame")
+tracks/1/path = NodePath("../Sprite3:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -32,57 +32,64 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 1 ]
+"values": [ 3 ]
 }
-tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite3:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 1 ]
+
+[sub_resource type="Animation" id=5]
+resource_name = "left"
+length = 0.28
+loop = true
+step = 0.07
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.07, 0.14, 0.21 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 3, 2, 1, 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../Sprite3:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.07, 0.14, 0.21 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 3, 2, 1, 0 ]
 }
 
 [sub_resource type="Animation" id=3]
-resource_name = "default"
-length = 0.4
+resource_name = "right"
+length = 0.28
 loop = true
+step = 0.07
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"times": PoolRealArray( 0, 0.07, 0.14, 0.21 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2, 3 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite2:frame")
+tracks/1/path = NodePath("../Sprite3:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2, 3 ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite3:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"times": PoolRealArray( 0, 0.07, 0.14, 0.21 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2, 3 ]
@@ -90,43 +97,129 @@ tracks/2/keys = {
 
 [node name="TransporterStart" type="StaticBody2D"]
 script = ExtResource( 2 )
+velocity = Vector2( 23, 0 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 64, -17.25 )
+position = Vector2( 734, -17.25 )
 shape = SubResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sprite")
+anims/RESET = SubResource( 4 )
+anims/left = SubResource( 5 )
+anims/right = SubResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 2, 2 )
 texture = ExtResource( 1 )
 hframes = 4
-frame = 1
+frame = 3
 
-[node name="Sprite2" type="Sprite" parent="."]
-position = Vector2( 64, 0 )
+[node name="Midlle" type="Node2D" parent="."]
 scale = Vector2( 2, 2 )
-texture = ExtResource( 3 )
-hframes = 4
-frame = 1
+
+[node name="TransporterMiddle" parent="Midlle" instance=ExtResource( 3 )]
+position = Vector2( 32, 0 )
+scale = Vector2( 1, 1 )
+
+[node name="TransporterMiddle2" parent="Midlle" instance=ExtResource( 3 )]
+position = Vector2( 63.5, 0 )
+scale = Vector2( 1, 1 )
+
+[node name="TransporterMiddle3" parent="Midlle" instance=ExtResource( 3 )]
+position = Vector2( 95.5, 0 )
+scale = Vector2( 1, 1 )
+
+[node name="TransporterMiddle4" parent="Midlle" instance=ExtResource( 3 )]
+position = Vector2( 126.5, 0 )
+scale = Vector2( 1, 1 )
+
+[node name="TransporterMiddle5" parent="Midlle" instance=ExtResource( 3 )]
+position = Vector2( 158.5, 0 )
+scale = Vector2( 1, 1 )
+
+[node name="TransporterMiddle6" parent="Midlle" instance=ExtResource( 3 )]
+position = Vector2( 190.5, 0 )
+scale = Vector2( 1, 1 )
+
+[node name="TransporterMiddle7" parent="Midlle" instance=ExtResource( 3 )]
+position = Vector2( 223, 0 )
+scale = Vector2( 1, 1 )
+
+[node name="TransporterMiddle8" parent="Midlle" instance=ExtResource( 3 )]
+position = Vector2( 254.5, 0 )
+scale = Vector2( 1, 1 )
+
+[node name="TransporterMiddle9" parent="Midlle" instance=ExtResource( 3 )]
+position = Vector2( 285.5, 0 )
+scale = Vector2( 1, 1 )
+
+[node name="TransporterMiddle10" parent="Midlle" instance=ExtResource( 3 )]
+position = Vector2( 317.5, 0 )
+scale = Vector2( 1, 1 )
+
+[node name="TransporterMiddle11" parent="Midlle" instance=ExtResource( 3 )]
+position = Vector2( 349.5, 0 )
+scale = Vector2( 1, 1 )
+
+[node name="TransporterMiddle12" parent="Midlle" instance=ExtResource( 3 )]
+position = Vector2( 382, 0 )
+scale = Vector2( 1, 1 )
+
+[node name="TransporterMiddle13" parent="Midlle" instance=ExtResource( 3 )]
+position = Vector2( 413.5, 0 )
+scale = Vector2( 1, 1 )
+
+[node name="TransporterMiddle14" parent="Midlle" instance=ExtResource( 3 )]
+position = Vector2( 445, 0 )
+scale = Vector2( 1, 1 )
+
+[node name="TransporterMiddle15" parent="Midlle" instance=ExtResource( 3 )]
+position = Vector2( 476.5, 0 )
+scale = Vector2( 1, 1 )
+
+[node name="TransporterMiddle16" parent="Midlle" instance=ExtResource( 3 )]
+position = Vector2( 509, 0 )
+scale = Vector2( 1, 1 )
+
+[node name="TransporterMiddle17" parent="Midlle" instance=ExtResource( 3 )]
+position = Vector2( 540.5, 0 )
+scale = Vector2( 1, 1 )
+
+[node name="TransporterMiddle18" parent="Midlle" instance=ExtResource( 3 )]
+position = Vector2( 572, 0 )
+scale = Vector2( 1, 1 )
+
+[node name="TransporterMiddle19" parent="Midlle" instance=ExtResource( 3 )]
+position = Vector2( 604, 0 )
+scale = Vector2( 1, 1 )
+
+[node name="TransporterMiddle20" parent="Midlle" instance=ExtResource( 3 )]
+position = Vector2( 636.5, 0 )
+scale = Vector2( 1, 1 )
+
+[node name="TransporterMiddle21" parent="Midlle" instance=ExtResource( 3 )]
+position = Vector2( 668.5, 0 )
+scale = Vector2( 1, 1 )
+
+[node name="TransporterMiddle22" parent="Midlle" instance=ExtResource( 3 )]
+position = Vector2( 700.5, 0 )
+scale = Vector2( 1, 1 )
 
 [node name="Sprite3" type="Sprite" parent="."]
-position = Vector2( 128, 0 )
+position = Vector2( 1463, 1 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 4 )
 hframes = 4
-frame = 1
+frame = 3
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2( 64, -20.5 )
+position = Vector2( 734, -21.875 )
 shape = SubResource( 1 )
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "default"
-anims/RESET = SubResource( 2 )
-anims/default = SubResource( 3 )
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]

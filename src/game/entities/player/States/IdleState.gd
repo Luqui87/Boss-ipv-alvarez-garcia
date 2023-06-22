@@ -2,6 +2,7 @@ extends AbstractState
 
 func enter():
 	character._play_animation("idle")
+	character.emit_signal("grounded_change",true)
 
 func handle_input(event: InputEvent) -> void:
 	if event.is_action_pressed("attack"):
@@ -26,6 +27,6 @@ func update(delta: float) -> void:
 func handle_event(event: String, value = null) -> void:
 	match event:
 		"hit":
-			character._handle_hit(value)
+			emit_signal("finished","hurt")
 		"healed":
 			character._handle_heal(value)

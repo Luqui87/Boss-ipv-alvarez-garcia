@@ -19,13 +19,11 @@ func update(delta:float) -> void:
 	if character.move_direction == 0:
 		character._handle_deacceleration()
 	if character.is_near_wall():
-			emit_signal("finished","nearWall")
-	elif character.is_on_floor():
-		character.emit_signal("grounded_change",true)
+		emit_signal("finished","nearWall")
+	if character.is_on_floor():
 		if character.move_direction != 0:
 			emit_signal("finished","move")
 		else:
-			character._play_animation("landing",false)
 			emit_signal("finished","idle")
 		
 
@@ -33,6 +31,11 @@ func handle_input(event: InputEvent) -> void:
 	if event.is_action_pressed("attack"):
 		character._handle_attack()
 
-func _on_BodyAnimations_animation_finished(anim_name):
+func _on_animation_finished(anim_name):
 	if (anim_name == "landing"):
 		emit_signal("finished", "idle")
+		
+func handle_event(event: String, value = null) -> void:
+	match event:
+		"hit":
+			emit_signal("finished","hurt")

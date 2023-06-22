@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://assets/textures/entities/player/adventurer-v1.5-Sheet.png" type="Texture" id=1]
 [ext_resource path="res://src/game/entities/player/Player.gd" type="Script" id=2]
@@ -241,11 +241,16 @@ tracks/0/keys = {
 "values": [ 79, 80 ]
 }
 
+[sub_resource type="CapsuleShape2D" id=17]
+radius = 12.6667
+height = 30.6667
+
 [node name="Player" type="KinematicBody2D"]
 scale = Vector2( 1.5, 1.5 )
 collision_layer = 2
 collision_mask = 5
 script = ExtResource( 2 )
+max_hp = 5
 H_SPEED_LIMIT = 600.0
 jump_speed = 900.0
 knockback = Vector2( 400, 400 )
@@ -278,13 +283,13 @@ scale = Vector2( 2.00187, 2.01822 )
 texture = ExtResource( 1 )
 hframes = 7
 vframes = 16
-frame = 99
+frame = 1
 
 [node name="Melee" type="Area2D" parent="Body"]
 position = Vector2( 0.529661, 1.54824 )
 scale = Vector2( 0.5, 0.4 )
 collision_layer = 8
-collision_mask = 0
+collision_mask = 8
 
 [node name="MeleeShape" type="CollisionShape2D" parent="Body/Melee"]
 position = Vector2( 34.907, -10.0636 )
@@ -292,6 +297,7 @@ shape = SubResource( 6 )
 disabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource( 1 )
 
 [node name="floorCast1" type="RayCast2D" parent="."]
@@ -332,7 +338,16 @@ anims/slide = SubResource( 15 )
 anims/wallJump = SubResource( 13 )
 anims/wallSlide = SubResource( 11 )
 
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 7.33333, 0.666667 )
+shape = SubResource( 17 )
+
 [connection signal="hit" from="." to="StateMachine" method="_on_Player_hit"]
 [connection signal="area_entered" from="Body/Melee" to="." method="_on_Melee_area_entered"]
 [connection signal="body_entered" from="Body/Melee" to="." method="_on_Melee_body_entered"]
-[connection signal="animation_finished" from="BodyAnimations" to="StateMachine/Jump" method="_on_BodyAnimations_animation_finished"]
+[connection signal="animation_finished" from="BodyAnimations" to="StateMachine" method="_on_animation_finished"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]

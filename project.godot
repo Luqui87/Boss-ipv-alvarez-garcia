@@ -28,12 +28,18 @@ _global_script_classes=[ {
 "class": "Player",
 "language": "GDScript",
 "path": "res://src/game/entities/player/Player.gd"
+}, {
+"base": "Area2D",
+"class": "Projectile",
+"language": "GDScript",
+"path": "res://src/game/entities/enemies/Proyectile.gd"
 } ]
 _global_script_class_icons={
 "AbstractState": "",
 "AbstractStateMachine": "",
 "GameLevel": "",
-"Player": ""
+"Player": "",
+"Projectile": ""
 }
 
 [application]

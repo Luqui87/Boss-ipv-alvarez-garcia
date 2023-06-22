@@ -12,8 +12,6 @@ func update(delta:float) -> void:
 	elif !character.is_near_wall():
 		emit_signal("finished", "move")
 
-func _on_animation_finished(anim_name: String) -> void:
-	return
 
 func handle_input(event: InputEvent) -> void:
 	if event.is_action_pressed("jump") :

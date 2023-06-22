@@ -19,6 +19,7 @@ onready var wall_check : RayCast2D = $WallCheck
 onready var floorCast1 : RayCast2D = $floorCast1
 onready var floorCast2 : RayCast2D = $floorCast2
 onready var floorCast3 : RayCast2D = $floorCast3
+onready var meleeShape: CollisionShape2D = $Body/Melee/MeleeShape
 
 
 #onready var floor_raycasts: Array = $FloorRaycasts.get_children()
@@ -37,20 +38,20 @@ export (Vector2) var knockback ;
 var velocity: Vector2 = Vector2.ZERO
 var snap_vector: Vector2 = SNAP_DIRECTION * SNAP_LENGTH
 var move_direction: int = 0
-var stop_on_slope: bool = true
+var stop_on_slope: bool = false
 var last_direction = 1
 var attacking : bool
-var on_transporter : bool = false
 
 func _ready() -> void:
 	state_machine._set_character(self)
 
 
 func _handle_move_input() -> void:
+	
 	move_direction = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))
 	if move_direction != 0:
-		velocity.x = clamp(velocity.x + (move_direction * ACCELERATION), -H_SPEED_LIMIT, H_SPEED_LIMIT)
-		$WallCheck.rotation_degrees = 90 * (- last_direction)
+		velocity.x = clamp(velocity.x + (move_direction * ACCELERATION), -H_SPEED_LIMIT, H_SPEED_LIMIT) + get_floor_velocity().x
+		$WallCheck.rotation_degrees = 90 * -move_direction
 		last_direction = move_direction
 
 	if move_direction < 0:
@@ -68,8 +69,6 @@ func _handle_deacceleration() -> void:
 
 func _apply_movement():
 	velocity.y += gravity
-	if on_transporter :
-		velocity.x += 20
 	velocity = move_and_slide_with_snap(velocity, snap_vector, FLOOR_NORMAL, stop_on_slope, 4, SLOPE_THRESHOLD)
 	if is_on_floor() && snap_vector == Vector2.ZERO:
 		snap_vector = SNAP_DIRECTION * SNAP_LENGTH
@@ -95,7 +94,6 @@ func _handle_hit(amount: int) -> void:
 	
 	velocity.y = -knockback.y
 	velocity.x = -knockback.x * last_direction
-	print(last_direction)
 	
 	Global.health -= 1
 	if (Global.health == 0):
@@ -104,8 +102,6 @@ func _handle_hit(amount: int) -> void:
 func _remove():
 	hide()
 	collision_layer = 0
-
-
 
 func is_near_wall():
 	return wall_check.is_colliding()
@@ -122,11 +118,14 @@ func handle_wall_jump():
 	snap_vector = Vector2.ZERO
 	velocity.y = -jump_speed
 	velocity.x = - 400 * last_direction
-	body.flip_h = true
 	move_direction = - last_direction
 	wall_check.rotation_degrees = 90 * ( last_direction)
-	
-	
+	if move_direction < 0:
+		body.flip_h = true
+		
+	elif move_direction > 0:
+		body.flip_h = false
+		
 
 func _handle_dead():
 	emit_signal("dead")
@@ -163,10 +162,7 @@ func _on_Melee_area_entered(area):
 		snap_vector = Vector2.ZERO
 		$Body/Melee/MeleeShape.disabled = true
 
-func _handle_transporter(direction):
-	on_transporter = true
 
-func _handle_exit_transporter():
-	on_transporter = false
-
-
+func _on_Area2D_area_entered(area):
+	notify_hit(1)
+	

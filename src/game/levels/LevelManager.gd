@@ -47,6 +47,7 @@ func _on_Play_pressed():
 func _on_Back_pressed():
 	get_tree().change_scene("res://src/screens/MainMenu.tscn")
 	Global.level_start = true
+	$UI/GUI/Timer.stop()
 
 func _On_Timer_Start():
 	$UI/GUI/Timer.start()

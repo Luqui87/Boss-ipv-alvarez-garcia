@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Running On Tile.mp3-25c581a3fe1e5dd6b63febbb27762cb5.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/player/Running On Tile.mp3"
+dest_files=[ "res://.import/Running On Tile.mp3-25c581a3fe1e5dd6b63febbb27762cb5.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

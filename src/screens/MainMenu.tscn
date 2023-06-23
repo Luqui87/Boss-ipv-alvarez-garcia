@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://theme.tres" type="Theme" id=1]
 [ext_resource path="res://src/screens/MainMenu.gd" type="Script" id=2]
 [ext_resource path="res://assets/textures/menu/Castle Ruins 2.png" type="Texture" id=3]
+[ext_resource path="res://assets/audio/background/Press Fuse - French Fuse.mp3" type="AudioStream" id=4]
 
 [sub_resource type="Theme" id=1]
 
@@ -56,12 +57,16 @@ text = "Quit"
 [node name="Label" type="Label" parent="Container"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -309.0
-margin_top = 40.0
-margin_right = 317.0
-margin_bottom = 81.0
+margin_left = -271.0
+margin_top = 98.0
+margin_right = 305.0
+margin_bottom = 172.0
 theme = ExtResource( 1 )
-text = "The Tales of Kirsty"
+text = "The Tales  of Kirsty"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+autoplay = true
 
 [connection signal="pressed" from="Container/Buttons/Start" to="." method="_on_Start_pressed"]
 [connection signal="pressed" from="Container/Buttons/Quit" to="." method="_on_Quit_pressed"]

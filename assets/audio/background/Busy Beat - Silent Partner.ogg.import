@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Busy Beat - Silent Partner.ogg-711a4480a2c9de4fe81a271282b5e951.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/background/Busy Beat - Silent Partner.ogg"
+dest_files=[ "res://.import/Busy Beat - Silent Partner.ogg-711a4480a2c9de4fe81a271282b5e951.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

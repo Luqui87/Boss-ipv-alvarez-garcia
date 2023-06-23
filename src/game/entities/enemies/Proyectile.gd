@@ -18,5 +18,5 @@ func _physics_process(delta):
 	position += direction*speed*delta
 
 func _on_Proyectile_body_entered(body):
-	if body is StaticBody2D:
+	if ! body is Player:
 		emit_signal("delete_requested",self)

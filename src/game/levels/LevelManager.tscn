@@ -25,11 +25,23 @@ margin_right = 497.0
 margin_bottom = 274.0
 size_flags_horizontal = 3
 max_value = 5.0
+step = 2.0
 value = 5.0
-texture_under = ExtResource( 5 )
-texture_progress = ExtResource( 4 )
+texture_under = ExtResource( 4 )
+texture_progress = ExtResource( 5 )
 fill_mode = 3
 nine_patch_stretch = true
+
+[node name="Label" type="Label" parent="UI/GUI"]
+visible = false
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -20.0
+margin_right = 20.0
+margin_bottom = 32.0
+
+[node name="Timer" type="Timer" parent="UI/GUI"]
+wait_time = 420.0
 
 [node name="Menus" type="Control" parent="UI"]
 pause_mode = 2
@@ -63,9 +75,9 @@ theme = ExtResource( 3 )
 alignment = 1
 
 [node name="Label" type="Label" parent="UI/Menus/PauseMenu/VBoxContainer"]
-margin_top = 56.0
+margin_top = 61.0
 margin_right = 280.0
-margin_bottom = 97.0
+margin_bottom = 93.0
 size_flags_vertical = 6
 text = "Pause"
 align = 1

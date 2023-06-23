@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Press Fuse - French Fuse.mp3-a5ac61c52f9522eb9ce574590b94ecd7.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/background/Press Fuse - French Fuse.mp3"
+dest_files=[ "res://.import/Press Fuse - French Fuse.mp3-a5ac61c52f9522eb9ce574590b94ecd7.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

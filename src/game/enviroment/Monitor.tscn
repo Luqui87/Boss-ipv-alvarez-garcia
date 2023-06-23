@@ -5,7 +5,7 @@
 [ext_resource path="res://src/game/enviroment/Monitor.gd" type="Script" id=3]
 
 [sub_resource type="RectangleShape2D" id=59]
-extents = Vector2( 68, 160 )
+extents = Vector2( 68, 161.5 )
 
 [sub_resource type="Animation" id=60]
 length = 0.001
@@ -136,7 +136,7 @@ hframes = 8
 frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Door"]
-position = Vector2( -10, -118 )
+position = Vector2( -10, -116.5 )
 shape = SubResource( 59 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Door"]

@@ -3,7 +3,7 @@
 [ext_resource path="res://assets/fonts/TrobusExpandedPersonalUse.ttf" type="DynamicFontData" id=1]
 
 [sub_resource type="DynamicFont" id=1]
-size = 28
+size = 40
 outline_size = 2
 outline_color = Color( 0.466667, 0.0117647, 0.0117647, 1 )
 font_data = ExtResource( 1 )

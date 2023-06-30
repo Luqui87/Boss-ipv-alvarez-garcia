@@ -1,9 +1,14 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://theme.tres" type="Theme" id=1]
 [ext_resource path="res://src/screens/MainMenu.gd" type="Script" id=2]
-[ext_resource path="res://assets/textures/menu/Castle Ruins 2.png" type="Texture" id=3]
+[ext_resource path="res://assets/textures/background/MainMenu/1.png" type="Texture" id=3]
 [ext_resource path="res://assets/audio/background/Press Fuse - French Fuse.mp3" type="AudioStream" id=4]
+[ext_resource path="res://src/screens/ParallaxBackground.gd" type="Script" id=5]
+[ext_resource path="res://assets/textures/background/MainMenu/4.png" type="Texture" id=6]
+[ext_resource path="res://assets/textures/background/MainMenu/5.png" type="Texture" id=7]
+[ext_resource path="res://assets/textures/background/MainMenu/3.png" type="Texture" id=8]
+[ext_resource path="res://assets/textures/background/MainMenu/2.png" type="Texture" id=9]
 
 [sub_resource type="Theme" id=1]
 
@@ -14,29 +19,76 @@ script = ExtResource( 2 )
 [node name="Container" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
 
-[node name="Background" type="TextureRect" parent="Container"]
+[node name="Background" type="Control" parent="Container"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 2.0
 mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="Container/Background"]
+script = ExtResource( 5 )
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Container/Background/ParallaxBackground"]
+motion_scale = Vector2( 0.2, 0.2 )
+motion_mirroring = Vector2( 1728, 0 )
+
+[node name="Sprite" type="Sprite" parent="Container/Background/ParallaxBackground/ParallaxLayer"]
+scale = Vector2( 3, 3.35 )
 texture = ExtResource( 3 )
-expand = true
-stretch_mode = 1
+centered = false
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="Container/Background/ParallaxBackground"]
+motion_scale = Vector2( 0.4, 0.4 )
+motion_mirroring = Vector2( 1728, 0 )
+
+[node name="Sprite" type="Sprite" parent="Container/Background/ParallaxBackground/ParallaxLayer2"]
+scale = Vector2( 3, 3.35 )
+texture = ExtResource( 9 )
+centered = false
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="Container/Background/ParallaxBackground"]
+motion_scale = Vector2( 0.6, 0.6 )
+motion_mirroring = Vector2( 1728, 0 )
+
+[node name="Sprite" type="Sprite" parent="Container/Background/ParallaxBackground/ParallaxLayer3"]
+scale = Vector2( 3, 3.35 )
+texture = ExtResource( 8 )
+centered = false
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="Container/Background/ParallaxBackground"]
+motion_scale = Vector2( 0.8, 0.8 )
+motion_mirroring = Vector2( 1728, 0 )
+
+[node name="Sprite" type="Sprite" parent="Container/Background/ParallaxBackground/ParallaxLayer4"]
+scale = Vector2( 3, 3.35 )
+texture = ExtResource( 6 )
+centered = false
+
+[node name="ParallaxLayer5" type="ParallaxLayer" parent="Container/Background/ParallaxBackground"]
+motion_mirroring = Vector2( 1728, 0 )
+
+[node name="Sprite" type="Sprite" parent="Container/Background/ParallaxBackground/ParallaxLayer5"]
+scale = Vector2( 3, 3.35 )
+texture = ExtResource( 7 )
+centered = false
 
 [node name="Buttons" type="VBoxContainer" parent="Container"]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 11.0
-margin_top = -125.0
-margin_right = 232.0
+margin_left = 21.0
+margin_top = -130.0
+margin_right = 290.0
 margin_bottom = -25.0
 mouse_filter = 2
 theme = SubResource( 1 )
 alignment = 1
 
 [node name="Start" type="Button" parent="Container/Buttons"]
-margin_right = 255.0
+margin_right = 269.0
 margin_bottom = 50.0
 focus_neighbour_top = NodePath("../Quit")
 focus_neighbour_bottom = NodePath("../Quit")
@@ -46,8 +98,8 @@ text = "Start"
 
 [node name="Quit" type="Button" parent="Container/Buttons"]
 margin_top = 54.0
-margin_right = 255.0
-margin_bottom = 104.0
+margin_right = 269.0
+margin_bottom = 105.0
 focus_neighbour_top = NodePath("../Start")
 focus_neighbour_bottom = NodePath("../Start")
 size_flags_vertical = 3
@@ -55,16 +107,19 @@ theme = ExtResource( 1 )
 text = "Quit"
 
 [node name="Label" type="Label" parent="Container"]
-anchor_left = 0.5
+anchor_left = 0.473
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -184.0
-margin_top = -148.0
-margin_right = 210.0
-margin_bottom = -101.0
+margin_left = -405.16
+margin_top = -116.0
+margin_right = 480.0
+margin_bottom = -28.0
 theme = ExtResource( 1 )
 text = "LoneWolf"
+align = 1
+valign = 1
+autowrap = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )

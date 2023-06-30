@@ -5,6 +5,7 @@ export (AudioStream) var factory
 export (AudioStream) var PowerPlant
 
 signal startTimer
+signal player_dead
 
 func _ready():
 	
@@ -25,8 +26,10 @@ func _ready():
 	
 func on_player_dead():
 	Global.level_start = false
-	get_tree().call_deferred("reload_current_scene")
+#	get_tree().call_deferred("reload_current_scene")
 	Global.health = 5
+	emit_signal("player_dead")
+	
 
 func _on_Checkpoint3_body_entered(body):
 	if !Global.inFactory:

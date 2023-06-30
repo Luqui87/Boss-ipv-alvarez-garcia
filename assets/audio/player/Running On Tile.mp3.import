@@ -11,5 +11,5 @@ dest_files=[ "res://.import/Running On Tile.mp3-25c581a3fe1e5dd6b63febbb27762cb5
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

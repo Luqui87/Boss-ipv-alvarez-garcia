@@ -245,7 +245,7 @@ tracks/1/keys = {
 "start_offset": 0.0,
 "stream": ExtResource( 11 )
 } ],
-"times": PoolRealArray( -0.5 )
+"times": PoolRealArray( -0.2 )
 }
 
 [sub_resource type="Animation" id=15]
@@ -342,7 +342,7 @@ scale = Vector2( 2.00187, 2.01822 )
 texture = ExtResource( 1 )
 hframes = 7
 vframes = 16
-frame = 10
+frame = 12
 
 [node name="Melee" type="Area2D" parent="Body"]
 position = Vector2( 0.529661, 1.54824 )
@@ -407,6 +407,7 @@ shape = SubResource( 17 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 11 )
+bus = "player"
 
 [connection signal="hit" from="." to="StateMachine" method="_on_Player_hit"]
 [connection signal="area_entered" from="Body/Melee" to="." method="_on_Melee_area_entered"]

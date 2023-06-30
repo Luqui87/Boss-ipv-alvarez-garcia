@@ -17,11 +17,12 @@ func _setup_level(id: int) -> void:
 		var level_instance: GameLevel = levels[id].instance()
 		current_level_container.add_child(level_instance)
 		level_instance.connect("startTimer", self, "_On_Timer_Start")
+		level_instance.connect("player_dead", self, "_on_player_dead")
 
 func _ready():
 	_setup_level(0)
 	$UI/GUI/ProgressBar.value = 5
-	current_level_container.get_tree().set_pause(false)
+#	current_level_container.get_tree().set_pause(false)
 	if Global.inFactory:
 		$UI/GUI/Timer.start(Global.timeLeft)
 		$UI/GUI/Label.visible = true
@@ -52,3 +53,9 @@ func _on_Back_pressed():
 func _On_Timer_Start():
 	$UI/GUI/Timer.start()
 	$UI/GUI/Label.visible = true
+	
+func _on_player_dead():
+	$UI/GUI/Control/FadeIn/AnimationPlayer.play("FadeIn")
+	_setup_level(0)
+	
+	

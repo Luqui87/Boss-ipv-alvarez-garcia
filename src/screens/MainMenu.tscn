@@ -124,6 +124,7 @@ autowrap = true
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
 autoplay = true
+bus = "music"
 
 [connection signal="pressed" from="Container/Buttons/Start" to="." method="_on_Start_pressed"]
 [connection signal="pressed" from="Container/Buttons/Quit" to="." method="_on_Quit_pressed"]

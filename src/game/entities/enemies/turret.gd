@@ -18,6 +18,7 @@ func fire():
 	projectile_container.add_child(projectile)
 	projectile.set_starting_values(fire_position.global_position)
 	projectile.connect("delete_requested", self, "_on_projectile_delete_requested")
+	$AudioStreamPlayer.play()
 	
 func _on_projectile_delete_requested(projectile):
 	projectile_container.remove_child(projectile)

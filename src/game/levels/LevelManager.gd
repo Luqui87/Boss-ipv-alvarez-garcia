@@ -24,13 +24,12 @@ func _ready():
 	$UI/GUI/ProgressBar.value = 5
 #	current_level_container.get_tree().set_pause(false)
 	if Global.inFactory:
-		$UI/GUI/Timer.start(Global.timeLeft)
+		$UI/GUI/Timer.start()
 		$UI/GUI/Label.visible = true
 
 func _process(delta):
 	$UI/GUI/ProgressBar.value = Global.health
 	$UI/GUI/Label.text = "%d:%02d" % [floor($UI/GUI/Timer.time_left / 60), int($UI/GUI/Timer.time_left) % 60]
-	Global.timeLeft = $UI/GUI/Timer.time_left
 
 func _unhandled_input(event):
 	if event.is_action_pressed("pause"):

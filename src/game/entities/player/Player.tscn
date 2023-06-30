@@ -342,7 +342,7 @@ scale = Vector2( 2.00187, 2.01822 )
 texture = ExtResource( 1 )
 hframes = 7
 vframes = 16
-frame = 12
+frame = 14
 
 [node name="Melee" type="Area2D" parent="Body"]
 position = Vector2( 0.529661, 1.54824 )
@@ -406,7 +406,7 @@ position = Vector2( 7.33333, 0.666667 )
 shape = SubResource( 17 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 11 )
+stream = ExtResource( 12 )
 bus = "player"
 
 [connection signal="hit" from="." to="StateMachine" method="_on_Player_hit"]

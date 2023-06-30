@@ -1,4 +1,4 @@
-[gd_scene load_steps=164 format=2]
+[gd_scene load_steps=166 format=2]
 
 [ext_resource path="res://assets/textures/Tileset/Tileset.png" type="Texture" id=1]
 [ext_resource path="res://src/game/entities/player/Player.tscn" type="PackedScene" id=2]
@@ -515,6 +515,38 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 
 [sub_resource type="RectangleShape2D" id=93]
 extents = Vector2( 34, 17 )
+
+[sub_resource type="Animation" id=106]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1 ]
+}
+
+[sub_resource type="Animation" id=107]
+resource_name = "show"
+length = 0.7
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
 
 [sub_resource type="SegmentShape2D" id=52]
 a = Vector2( 1, 649 )
@@ -1267,11 +1299,6 @@ position = Vector2( 1536, -10.0001 )
 rotation = 0.555015
 texture = ExtResource( 38 )
 
-[node name="WindSlash" type="Sprite" parent="Enviroment/PowerPlant/Sprites"]
-position = Vector2( 2857.75, 655 )
-scale = Vector2( 0.1, 0.1 )
-texture = ExtResource( 52 )
-
 [node name="19" type="Sprite" parent="Enviroment/PowerPlant/Sprites"]
 position = Vector2( 1718.75, 488.25 )
 texture = ExtResource( 46 )
@@ -1327,6 +1354,23 @@ texture = ExtResource( 54 )
 [node name="34" type="Sprite" parent="Enviroment/PowerPlant/Sprites"]
 position = Vector2( 2447.25, 678.25 )
 texture = ExtResource( 51 )
+
+[node name="Square" type="Sprite" parent="Enviroment/PowerPlant/Sprites"]
+position = Vector2( 5409, 115 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 56 )
+hframes = 4
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Enviroment/PowerPlant/Sprites/Square"]
+autoplay = "show"
+anims/RESET = SubResource( 106 )
+anims/show = SubResource( 107 )
+
+[node name="WindSlash" type="Sprite" parent="Enviroment/PowerPlant"]
+position = Vector2( 11431, 2611 )
+scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 52 )
 
 [node name="TileMap" type="TileMap" parent="Enviroment/PowerPlant"]
 scale = Vector2( 2, 2 )
@@ -1397,7 +1441,7 @@ position = Vector2( 11435, 2482 )
 [node name="Doors" type="Node2D" parent="Enviroment/PowerPlant"]
 
 [node name="Square" type="Sprite" parent="Enviroment/PowerPlant/Doors"]
-position = Vector2( 5409, 115 )
+position = Vector2( 11436, 2389 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 56 )
 hframes = 4
@@ -1646,7 +1690,7 @@ tile_data = PoolIntArray( -983005, 0, 0, -983004, 0, 0, -983003, 0, 0, -983002, 
 position = Vector2( 872, 80 )
 
 [node name="hook2" parent="Enviroment/Factory/Section2" instance=ExtResource( 17 )]
-position = Vector2( 3603.64, 303.637 )
+position = Vector2( 2361, 137 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -1695,7 +1739,7 @@ position = Vector2( 19345, 3699 )
 rotation = 1.5708
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 353, 579 )
+position = Vector2( 20844, 2644 )
 collision_mask = 21
 __meta__ = {
 "_edit_group_": true
@@ -1711,6 +1755,7 @@ script = ExtResource( 7 )
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 27 )
 autoplay = true
+bus = "music"
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2( 23456, 4351 )

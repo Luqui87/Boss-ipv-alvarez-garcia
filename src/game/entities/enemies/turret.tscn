@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/textures/entities/turret.png" type="Texture" id=1]
 [ext_resource path="res://src/game/entities/enemies/turret.gd" type="Script" id=2]
 [ext_resource path="res://src/game/entities/enemies/Proyectile.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/audio/enviroment/shot.ogg" type="AudioStream" id=4]
+[ext_resource path="res://assets/audio/enviroment/Hit With Metal Tray.mp3" type="AudioStream" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 51, 25.5 )
@@ -70,6 +71,7 @@ collision_layer = 32
 collision_mask = 8
 script = ExtResource( 2 )
 projectile_scene = ExtResource( 3 )
+Hit = ExtResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -6, 3.5 )

@@ -1,6 +1,7 @@
 extends Area2D
 
 export (PackedScene) var projectile_scene: PackedScene
+export (AudioStream) var Hit
 onready var fire_position: Position2D = $Position2D
 
 var projectile_container: Node
@@ -29,3 +30,5 @@ func _on_Turret_area_entered(area):
 	if area.name == "Melee":
 		$AnimationPlayer.play("dead")
 		$Timer.stop()
+		$AudioStreamPlayer.stream = Hit
+		$AudioStreamPlayer.play()

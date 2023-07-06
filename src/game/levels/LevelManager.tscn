@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/game/levels/Level01.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/game/levels/LevelManager.gd" type="Script" id=2]
 [ext_resource path="res://theme.tres" type="Theme" id=3]
 [ext_resource path="res://assets/textures/UI/GUI/EmptyHealth.png" type="Texture" id=4]
 [ext_resource path="res://assets/textures/UI/GUI/health.png" type="Texture" id=5]
+[ext_resource path="res://assets/textures/UI/26.png" type="Texture" id=6]
 
 [sub_resource type="Gradient" id=2]
 interpolation_mode = 1
@@ -44,6 +45,22 @@ tracks/1/keys = {
 "values": [ true, false ]
 }
 
+[sub_resource type="Animation" id=6]
+resource_name = "show"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.235294 ) ]
+}
+
 [sub_resource type="Theme" id=1]
 
 [node name="LevelManager" type="Node"]
@@ -60,39 +77,7 @@ margin_right = 1.0
 mouse_filter = 2
 theme = ExtResource( 3 )
 
-[node name="Control" type="Control" parent="UI/GUI"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-
-[node name="FadeIn" type="Control" parent="UI/GUI/Control"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -960.0
-margin_top = -540.0
-margin_right = 960.0
-margin_bottom = 540.0
-
-[node name="TextureRect" type="TextureRect" parent="UI/GUI/Control/FadeIn"]
-visible = false
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -32.0
-margin_top = -32.0
-margin_right = 32.0
-margin_bottom = 32.0
-rect_scale = Vector2( 35, 35 )
-rect_pivot_offset = Vector2( 32, 32 )
-texture = SubResource( 3 )
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/GUI/Control/FadeIn"]
-root_node = NodePath("../..")
-anims/FadeIn = SubResource( 4 )
-
-[node name="ProgressBar" type="TextureProgress" parent="UI/GUI"]
+[node name="HealthBar" type="TextureProgress" parent="UI/GUI"]
 anchor_right = 0.178
 anchor_bottom = 0.098
 margin_left = 36.0
@@ -106,7 +91,7 @@ texture_under = ExtResource( 4 )
 texture_progress = ExtResource( 5 )
 nine_patch_stretch = true
 
-[node name="Label" type="Label" parent="UI/GUI"]
+[node name="TimerLabel" type="Label" parent="UI/GUI"]
 visible = false
 anchor_left = 0.5
 anchor_right = 0.5
@@ -120,6 +105,44 @@ valign = 1
 
 [node name="Timer" type="Timer" parent="UI/GUI"]
 wait_time = 420.0
+
+[node name="FadeIn" type="Control" parent="UI/GUI"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -960.0
+margin_top = -540.0
+margin_right = 960.0
+margin_bottom = 540.0
+
+[node name="TextureRect" type="TextureRect" parent="UI/GUI/FadeIn"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -32.0
+margin_top = -32.0
+margin_right = 32.0
+margin_bottom = 32.0
+rect_scale = Vector2( 35, 35 )
+rect_pivot_offset = Vector2( 32, 32 )
+texture = SubResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/GUI/FadeIn"]
+root_node = NodePath("../..")
+anims/FadeIn = SubResource( 4 )
+
+[node name="Filter" type="TextureRect" parent="UI/GUI"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 6 )
+expand = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/GUI/Filter"]
+anims/show = SubResource( 6 )
 
 [node name="Menus" type="Control" parent="UI"]
 pause_mode = 2
@@ -270,6 +293,8 @@ size_flags_horizontal = 3
 text = "Back"
 
 [node name="CurrentLevelContainer" type="Node" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
 [connection signal="pressed" from="UI/Menus/PauseMenu/VBoxContainer/VBoxContainer/Play" to="." method="_on_Play_pressed"]
 [connection signal="pressed" from="UI/Menus/PauseMenu/VBoxContainer/VBoxContainer/Back" to="." method="_on_Back_pressed"]

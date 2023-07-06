@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Hit With Metal Tray.mp3-01f58d433b7bd61c2af55be1d50bdef8.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/enviroment/Hit With Metal Tray.mp3"
+dest_files=[ "res://.import/Hit With Metal Tray.mp3-01f58d433b7bd61c2af55be1d50bdef8.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -7,4 +7,3 @@ var inFactory : bool = false
 
 var health = 5
 
-var timeLeft = 420

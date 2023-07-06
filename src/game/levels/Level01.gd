@@ -1,11 +1,11 @@
 extends Node
 class_name GameLevel
 
-export (AudioStream) var factory
-export (AudioStream) var PowerPlant
+export (Array, AudioStream) var tracks: Array
 
-signal startTimer
+signal _enter_factory
 signal player_dead
+signal play_music(track)
 
 func _ready():
 	
@@ -15,10 +15,8 @@ func _ready():
 		Global.spawn_point = player.global_position
 		
 	player.global_position = Global.spawn_point
-	
-	if Global.inFactory:
-		$AudioStreamPlayer.stream = factory
-		$AudioStreamPlayer.play()
+
+	emit_signal("play_music", tracks[0])
 	
 	player.connect("dead",self,"on_player_dead")
 	player.connect("grounded_change", $Player/Camera2D, "_on_player_grounded_update")
@@ -26,17 +24,14 @@ func _ready():
 	
 func on_player_dead():
 	Global.level_start = false
-#	get_tree().call_deferred("reload_current_scene")
 	Global.health = 5
 	emit_signal("player_dead")
 	
 
 func _on_Checkpoint3_body_entered(body):
-	if !Global.inFactory:
-		emit_signal("startTimer")
-		$AudioStreamPlayer.stream = factory
-		$AudioStreamPlayer.play()
-		Global.inFactory = true
+	Global.inFactory = true
+	emit_signal("_enter_factory")
+	emit_signal("play_music", tracks[1])
 	
 
 

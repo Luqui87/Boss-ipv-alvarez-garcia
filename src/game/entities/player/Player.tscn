@@ -342,7 +342,6 @@ scale = Vector2( 2.00187, 2.01822 )
 texture = ExtResource( 1 )
 hframes = 7
 vframes = 16
-frame = 14
 
 [node name="Melee" type="Area2D" parent="Body"]
 position = Vector2( 0.529661, 1.54824 )
@@ -384,6 +383,7 @@ enabled = true
 cast_to = Vector2( -0.000102997, 28 )
 
 [node name="BodyAnimations" type="AnimationPlayer" parent="."]
+autoplay = "idle"
 reset_on_save = false
 anims/RESET = SubResource( 12 )
 anims/attack = SubResource( 4 )

@@ -1141,8 +1141,7 @@ extents = Vector2( 44.625, 141.25 )
 
 [node name="Level01" type="Node"]
 script = ExtResource( 4 )
-factory = ExtResource( 55 )
-PowerPlant = ExtResource( 27 )
+tracks = [ ExtResource( 27 ), ExtResource( 55 ) ]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 offset = Vector2( 0, -650 )
@@ -1208,7 +1207,7 @@ tile_data = PoolIntArray( 393251, 2, 0, 393252, 2, 0, 393253, 2, 0, 393254, 2, 0
 scale = Vector2( 4, 4 )
 
 [node name="3" type="Sprite" parent="Enviroment/PowerPlant/Sprites"]
-position = Vector2( 10, 60 )
+position = Vector2( 10.25, 64.5 )
 texture = ExtResource( 35 )
 
 [node name="11" type="Sprite" parent="Enviroment/PowerPlant/Sprites"]
@@ -1356,8 +1355,8 @@ position = Vector2( 2447.25, 678.25 )
 texture = ExtResource( 51 )
 
 [node name="Square" type="Sprite" parent="Enviroment/PowerPlant/Sprites"]
-position = Vector2( 5409, 115 )
-scale = Vector2( 3, 3 )
+position = Vector2( 2857.38, 582.563 )
+scale = Vector2( 1.45002, 1.24167 )
 texture = ExtResource( 56 )
 hframes = 4
 frame = 1
@@ -1441,7 +1440,7 @@ position = Vector2( 11435, 2482 )
 [node name="Doors" type="Node2D" parent="Enviroment/PowerPlant"]
 
 [node name="Square" type="Sprite" parent="Enviroment/PowerPlant/Doors"]
-position = Vector2( 11436, 2389 )
+position = Vector2( 5408, 137 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 56 )
 hframes = 4
@@ -1501,8 +1500,16 @@ shape = SubResource( 59 )
 anims/RESET = SubResource( 100 )
 anims/open = SubResource( 101 )
 
+[node name="Checkpoints" type="Node2D" parent="Enviroment/PowerPlant"]
+
+[node name="Checkpoint" parent="Enviroment/PowerPlant/Checkpoints" instance=ExtResource( 6 )]
+position = Vector2( 5496, 2048 )
+
+[node name="Checkpoint3" parent="Enviroment/PowerPlant/Checkpoints" instance=ExtResource( 6 )]
+position = Vector2( 14595, 2607 )
+
 [node name="Factory" type="Node2D" parent="Enviroment"]
-position = Vector2( 14528, 1536 )
+position = Vector2( 17430, 1423 )
 
 [node name="wall" type="TileMap" parent="Enviroment/Factory"]
 scale = Vector2( 2, 2 )
@@ -1545,7 +1552,7 @@ position = Vector2( 505.25, 219 )
 texture = ExtResource( 65 )
 
 [node name="Pointer1" type="Sprite" parent="Enviroment/Factory/Sprites"]
-position = Vector2( 1186, 280.75 )
+position = Vector2( 1186, 287 )
 texture = ExtResource( 61 )
 
 [node name="Ladder3" type="Sprite" parent="Enviroment/Factory/Sprites"]
@@ -1720,26 +1727,19 @@ __meta__ = {
 position = Vector2( 4, -22 )
 shape = SubResource( 92 )
 
-[node name="Checkpoints" type="Node2D" parent="Enviroment"]
+[node name="Checkpoints" type="Node2D" parent="Enviroment/Factory"]
 
-[node name="Checkpoint" parent="Enviroment/Checkpoints" instance=ExtResource( 6 )]
-position = Vector2( 5409, 2055 )
+[node name="Checkpoint4" parent="Enviroment/Factory/Checkpoints" instance=ExtResource( 6 )]
+position = Vector2( 4719, 1086 )
+scale = Vector2( 2.18261, 2.71043 )
 
-[node name="Checkpoint2" parent="Enviroment/Checkpoints" instance=ExtResource( 6 )]
-position = Vector2( 6953, 1543 )
-
-[node name="Checkpoint3" parent="Enviroment/Checkpoints" instance=ExtResource( 6 )]
-position = Vector2( 14595, 2607 )
-
-[node name="Checkpoint4" parent="Enviroment/Checkpoints" instance=ExtResource( 6 )]
-position = Vector2( 19271, 2621 )
-
-[node name="Checkpoint5" parent="Enviroment/Checkpoints" instance=ExtResource( 6 )]
-position = Vector2( 19345, 3699 )
+[node name="Checkpoint5" parent="Enviroment/Factory/Checkpoints" instance=ExtResource( 6 )]
+position = Vector2( 4845, 2362 )
 rotation = 1.5708
+scale = Vector2( 1.02687, 2.12 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 20844, 2644 )
+position = Vector2( 19217, 2657 )
 collision_mask = 21
 __meta__ = {
 "_edit_group_": true
@@ -1780,15 +1780,15 @@ shape = SubResource( 105 )
 [connection signal="body_entered" from="Enviroment/PowerPlant/DeadWall" to="Enviroment/PowerPlant/DeadWall" method="_on_DeadWall_body_entered"]
 [connection signal="body_entered" from="Enviroment/PowerPlant/DeadWall2" to="Enviroment/PowerPlant/DeadWall2" method="_on_DeadWall_body_entered"]
 [connection signal="body_entered" from="Enviroment/PowerPlant/DeadWall3" to="Enviroment/PowerPlant/DeadWall3" method="_on_DeadWall_body_entered"]
+[connection signal="body_entered" from="Enviroment/PowerPlant/Checkpoints/Checkpoint3" to="." method="_on_Checkpoint3_body_entered"]
+[connection signal="body_entered" from="Enviroment/PowerPlant/Checkpoints/Checkpoint3" to="Enviroment/Factory/Section1" method="_on_Checkpoint3_body_entered"]
 [connection signal="body_entered" from="Enviroment/Factory/Section0/DeadWall3" to="Enviroment/Factory/Section0/DeadWall3" method="_on_DeadWall_body_entered"]
 [connection signal="timeout" from="Enviroment/Factory/Section1/Trapdoors/Timer" to="Enviroment/Factory/Section1/Trapdoors" method="_on_Timer_timeout"]
 [connection signal="timeout" from="Enviroment/Factory/Section1/Trapdoors2/Timer" to="Enviroment/Factory/Section1/Trapdoors2" method="_on_Timer_timeout"]
 [connection signal="timeout" from="Enviroment/Factory/Section1/Trapdoors3/Timer" to="Enviroment/Factory/Section1/Trapdoors3" method="_on_Timer_timeout"]
 [connection signal="body_entered" from="Enviroment/Factory/Section2/DeadWall3" to="Enviroment/Factory/Section2/DeadWall3" method="_on_DeadWall_body_entered"]
 [connection signal="area_entered" from="Enviroment/Factory/Section2/Area2D" to="Enviroment/Factory/Section2" method="_on_Area2D_area_entered"]
-[connection signal="body_entered" from="Enviroment/Checkpoints/Checkpoint3" to="." method="_on_Checkpoint3_body_entered"]
-[connection signal="body_entered" from="Enviroment/Checkpoints/Checkpoint3" to="Enviroment/Factory/Section1" method="_on_Checkpoint3_body_entered"]
-[connection signal="body_entered" from="Enviroment/Checkpoints/Checkpoint4" to="Enviroment/Factory/Section1" method="_on_Checkpoint3_body_entered"]
+[connection signal="body_entered" from="Enviroment/Factory/Checkpoints/Checkpoint4" to="Enviroment/Factory/Section1" method="_on_Checkpoint3_body_entered"]
 [connection signal="body_entered" from="End" to="." method="_on_End_body_entered"]
 
 [editable path="Enviroment/PowerPlant/Doors/Monitor"]

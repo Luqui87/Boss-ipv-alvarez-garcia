@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Castle Ruins 2.png-30bf292df8610c40858a1812ee29c983.stex"
+path="res://.import/26.png-956d23a9735e56aa949f700dcaa79887.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/menu/Castle Ruins 2.png"
-dest_files=[ "res://.import/Castle Ruins 2.png-30bf292df8610c40858a1812ee29c983.stex" ]
+source_file="res://assets/textures/UI/26.png"
+dest_files=[ "res://.import/26.png-956d23a9735e56aa949f700dcaa79887.stex" ]
 
 [params]
 

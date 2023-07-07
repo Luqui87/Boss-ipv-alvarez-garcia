@@ -147,8 +147,8 @@ func _handle_attack():
 		_play_animation("attack")	
 	else:
 		_play_animation("jumpAttack")
-	var meleePosition =  $Body/Melee/MeleeShape.position.x 
-	$Body/Melee/MeleeShape.position.x = abs(meleePosition) * (last_direction)
+	var meleePosition = meleeShape.position.x 
+	meleeShape.position.x = abs(meleePosition) * (last_direction)
 	
 
 func _on_Melee_body_entered(body):
@@ -160,9 +160,10 @@ func _on_Melee_area_entered(area):
 		_play_animation("jump",false)
 		velocity.y = -jump_speed
 		snap_vector = Vector2.ZERO
-		$Body/Melee/MeleeShape.disabled = true
+		meleeShape.set_deferred("disabled", true)
 
-
-func _on_Area2D_area_entered(area):
+func _on_Hitbox_area_entered(area):
 	notify_hit(1)
-	
+
+func _on_Hitbox_body_entered(body):
+	notify_hit(1)

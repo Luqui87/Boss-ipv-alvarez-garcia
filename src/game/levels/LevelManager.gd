@@ -23,10 +23,14 @@ func _setup_level(id: int) -> void:
 		level_instance.connect("_enter_factory", self, "_on_enter_factory")
 		level_instance.connect("player_dead", self, "_on_player_dead")
 		level_instance.connect("play_music", self, "on_play_music")
+		if Global.level_start:
+			on_play_music(level_instance.tracks[0])
+		
 
 func _ready():
 	_setup_level(0)
 	current_level_container.get_tree().set_pause(false)
+	var track = current_level_container.get_child(0).tracks[0]
 
 func _process(delta):
 	health_bar.value = Global.health
@@ -65,6 +69,5 @@ func _on_player_dead():
 	
 
 func on_play_music(track):
-	stream_player.stop()
 	stream_player.stream = track
 	stream_player.play()

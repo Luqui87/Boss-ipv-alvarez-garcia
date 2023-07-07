@@ -295,6 +295,7 @@ text = "Back"
 [node name="CurrentLevelContainer" type="Node" parent="."]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = "music"
 
 [connection signal="pressed" from="UI/Menus/PauseMenu/VBoxContainer/VBoxContainer/Play" to="." method="_on_Play_pressed"]
 [connection signal="pressed" from="UI/Menus/PauseMenu/VBoxContainer/VBoxContainer/Back" to="." method="_on_Back_pressed"]

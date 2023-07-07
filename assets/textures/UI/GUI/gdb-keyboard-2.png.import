@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/idle.png-e842c4b2efcb82008a60cf7f73277bcf.stex"
+path="res://.import/gdb-keyboard-2.png-1a1b917c2ac7ed2ccd8a2c5c0e74b699.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/entities/platform/idle.png"
-dest_files=[ "res://.import/idle.png-e842c4b2efcb82008a60cf7f73277bcf.stex" ]
+source_file="res://assets/textures/UI/GUI/gdb-keyboard-2.png"
+dest_files=[ "res://.import/gdb-keyboard-2.png-1a1b917c2ac7ed2ccd8a2c5c0e74b699.stex" ]
 
 [params]
 

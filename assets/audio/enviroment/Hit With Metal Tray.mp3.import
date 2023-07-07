@@ -11,5 +11,5 @@ dest_files=[ "res://.import/Hit With Metal Tray.mp3-01f58d433b7bd61c2af55be1d50b
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

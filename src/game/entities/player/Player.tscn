@@ -17,8 +17,8 @@
 extents = Vector2( 46.6231, 38.3964 )
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 19.0
-height = 36.0
+radius = 19.3333
+height = 25.3333
 
 [sub_resource type="Animation" id=12]
 length = 0.001
@@ -301,13 +301,13 @@ tracks/0/keys = {
 }
 
 [sub_resource type="CapsuleShape2D" id=17]
-radius = 12.6667
-height = 30.6667
+radius = 24.0
+height = 26.6667
 
 [node name="Player" type="KinematicBody2D"]
 scale = Vector2( 1.5, 1.5 )
 collision_layer = 2
-collision_mask = 5
+collision_mask = 0
 script = ExtResource( 2 )
 max_hp = 5
 H_SPEED_LIMIT = 600.0
@@ -347,40 +347,40 @@ vframes = 16
 position = Vector2( 0.529661, 1.54824 )
 scale = Vector2( 0.5, 0.4 )
 collision_layer = 8
-collision_mask = 8
+collision_mask = 0
 
 [node name="MeleeShape" type="CollisionShape2D" parent="Body/Melee"]
 position = Vector2( 34.907, -10.0636 )
 shape = SubResource( 6 )
 disabled = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
+[node name="CollisionBody" type="CollisionShape2D" parent="."]
+position = Vector2( -1.33333, 6 )
 shape = SubResource( 1 )
 
 [node name="floorCast1" type="RayCast2D" parent="."]
 position = Vector2( -13.3333, 31.3333 )
 scale = Vector2( 0.333333, 0.333333 )
 enabled = true
-cast_to = Vector2( -16.0001, 14.0001 )
+cast_to = Vector2( -14.0001, 14.0001 )
 
 [node name="floorCast2" type="RayCast2D" parent="."]
 position = Vector2( 13.3333, 30.6667 )
 scale = Vector2( 0.333333, 0.333333 )
 enabled = true
-cast_to = Vector2( 14.0001, 13.9999 )
+cast_to = Vector2( 12.0001, 15.9999 )
 
 [node name="floorCast3" type="RayCast2D" parent="."]
 position = Vector2( 0, 34 )
 scale = Vector2( 0.333333, 0.333333 )
 enabled = true
-cast_to = Vector2( 0, 34 )
+cast_to = Vector2( 0, 48.0001 )
 
 [node name="WallCheck" type="RayCast2D" parent="."]
 position = Vector2( 1, 2 )
 rotation = -1.5708
 enabled = true
-cast_to = Vector2( -0.000102997, 28 )
+cast_to = Vector2( -0.666748, 22.3333 )
 
 [node name="BodyAnimations" type="AnimationPlayer" parent="."]
 autoplay = "idle"
@@ -397,12 +397,13 @@ anims/slide = SubResource( 15 )
 anims/wallJump = SubResource( 13 )
 anims/wallSlide = SubResource( 11 )
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 32
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2( 7.33333, 0.666667 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2( -1.33333, 5.33333 )
 shape = SubResource( 17 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
@@ -413,4 +414,6 @@ bus = "player"
 [connection signal="area_entered" from="Body/Melee" to="." method="_on_Melee_area_entered"]
 [connection signal="body_entered" from="Body/Melee" to="." method="_on_Melee_body_entered"]
 [connection signal="animation_finished" from="BodyAnimations" to="StateMachine" method="_on_animation_finished"]
-[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
+[connection signal="area_entered" from="Hitbox" to="." method="_on_Hitbox_area_entered"]
+[connection signal="area_entered" from="Hitbox" to="." method="_on_Area2D_area_entered"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]

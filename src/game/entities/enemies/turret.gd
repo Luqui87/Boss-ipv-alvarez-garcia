@@ -3,12 +3,16 @@ extends Area2D
 export (PackedScene) var projectile_scene: PackedScene
 export (AudioStream) var Hit
 onready var fire_position: Position2D = $Position2D
+export var right : bool = true
 
 var projectile_container: Node
 
 func set_values( projectile_container):
 	self.projectile_container = projectile_container
 	$Timer.start()
+	if !right:
+		$Sprite.flip_h = true
+	fire()
 	
 	
 func _on_Timer_timeout():
@@ -16,6 +20,8 @@ func _on_Timer_timeout():
 	
 func fire():
 	var projectile: Projectile = projectile_scene.instance()
+	if !right:
+		projectile.direction = Vector2(-10, 0)
 	projectile_container.add_child(projectile)
 	projectile.set_starting_values(fire_position.global_position)
 	projectile.connect("delete_requested", self, "_on_projectile_delete_requested")

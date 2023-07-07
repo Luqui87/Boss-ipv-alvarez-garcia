@@ -8,3 +8,5 @@ func _on_Checkpoint3_body_entered(body):
 		$Trapdoors2/Timer.start()
 		$Trapdoors3/Timer.start()
 	
+func _on_Checkpoint5_body_entered(body):
+	$Turret2.set_values(self)

@@ -20,3 +20,8 @@ func _physics_process(delta):
 func _on_Proyectile_body_entered(body):
 	if ! body is Player:
 		emit_signal("delete_requested",self)
+
+
+func _on_Proyectile_area_entered(area):
+	if area.name == "Melee":
+		emit_signal("delete_requested",self)

@@ -122,8 +122,8 @@ position = Vector2( 5742, 918 )
 script = ExtResource( 3 )
 
 [node name="Door" type="StaticBody2D" parent="."]
-position = Vector2( 200, 0 )
-scale = Vector2( 1, 1.8 )
+position = Vector2( 198, 34 )
+scale = Vector2( 1, 1 )
 __meta__ = {
 "_edit_group_": true
 }

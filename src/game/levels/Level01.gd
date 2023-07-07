@@ -15,8 +15,6 @@ func _ready():
 		Global.spawn_point = player.global_position
 		
 	player.global_position = Global.spawn_point
-
-	emit_signal("play_music", tracks[0])
 	
 	player.connect("dead",self,"on_player_dead")
 	player.connect("grounded_change", $Player/Camera2D, "_on_player_grounded_update")
@@ -38,3 +36,7 @@ func _on_Checkpoint3_body_entered(body):
 func _on_End_body_entered(body):
 	get_tree().change_scene("res://src/screens/MainMenu.tscn")
 	Global.level_start = true
+
+
+func _on_Checkpoint4_body_entered(body):
+	$Enviroment/PowerPlant/Drones/Turret.set_values(self)

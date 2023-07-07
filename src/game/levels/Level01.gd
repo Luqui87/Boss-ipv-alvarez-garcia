@@ -18,6 +18,27 @@ func _ready():
 	
 	player.connect("dead",self,"on_player_dead")
 	player.connect("grounded_change", $Player/Camera2D, "_on_player_grounded_update")
+	
+	if Input.get_connected_joypads() == []:
+		$Enviroment/PowerPlant/Doors/Monitor/Bubble/Square.visible = false
+		$Enviroment/PowerPlant/Doors/Monitor/Bubble/E.visible = true
+		
+		$Enviroment/PowerPlant/Doors/Monitor6/Bubble/E.visible = true
+		$Enviroment/PowerPlant/Doors/Monitor6/Bubble/Space.visible = true
+		
+		$Enviroment/PowerPlant/Doors/Monitor6/Bubble/Square.visible = false
+		$Enviroment/PowerPlant/Doors/Monitor6/Bubble/Cross.visible = false
+	else:
+		$Enviroment/PowerPlant/Doors/Monitor/Bubble/Square.visible = true
+		$Enviroment/PowerPlant/Doors/Monitor/Bubble/E.visible = false
+		
+		$Enviroment/PowerPlant/Doors/Monitor6/Bubble/E.visible = false
+		$Enviroment/PowerPlant/Doors/Monitor6/Bubble/Space.visible = false
+		
+		$Enviroment/PowerPlant/Doors/Monitor6/Bubble/Square.visible = true
+		$Enviroment/PowerPlant/Doors/Monitor6/Bubble/Cross.visible = true
+		
+		
 
 	
 func on_player_dead():

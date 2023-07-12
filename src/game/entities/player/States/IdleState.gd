@@ -28,5 +28,5 @@ func handle_event(event: String, value = null) -> void:
 	match event:
 		"hit":
 			emit_signal("finished","hurt")
-		"healed":
-			character._handle_heal(value)
+		"dead":
+			emit_signal("finished","dead")

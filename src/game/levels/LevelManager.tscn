@@ -104,7 +104,7 @@ align = 1
 valign = 1
 
 [node name="Timer" type="Timer" parent="UI/GUI"]
-wait_time = 420.0
+wait_time = 300.0
 
 [node name="FadeIn" type="Control" parent="UI/GUI"]
 anchor_left = 0.5
@@ -174,9 +174,9 @@ theme = ExtResource( 3 )
 alignment = 1
 
 [node name="Label" type="Label" parent="UI/Menus/PauseMenu/VBoxContainer"]
-margin_top = 33.0
+margin_top = 44.0
 margin_right = 473.0
-margin_bottom = 121.0
+margin_bottom = 110.0
 size_flags_vertical = 6
 text = "Pause"
 align = 1
@@ -264,10 +264,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -180.0
-margin_top = -96.5
-margin_right = 180.0
-margin_bottom = 96.5
+margin_left = -727.0
+margin_top = -113.5
+margin_right = 727.0
+margin_bottom = 113.5
 
 [node name="Label" type="Label" parent="UI/Menus/LoseMenu/VBoxContainer"]
 margin_right = 1454.0
@@ -279,25 +279,40 @@ text = "Wanna try again?
 margin_top = 183.0
 margin_right = 1454.0
 margin_bottom = 227.0
+size_flags_horizontal = 5
 
 [node name="Restart" type="Button" parent="UI/Menus/LoseMenu/VBoxContainer/HBoxContainer"]
-margin_right = 354.0
+margin_right = 725.0
 margin_bottom = 44.0
+focus_neighbour_left = NodePath("../Back")
+focus_neighbour_right = NodePath("../Back")
+size_flags_horizontal = 3
+size_flags_vertical = 0
 text = "Restart"
 
 [node name="Back" type="Button" parent="UI/Menus/LoseMenu/VBoxContainer/HBoxContainer"]
-margin_left = 358.0
+margin_left = 729.0
 margin_right = 1454.0
 margin_bottom = 44.0
+focus_neighbour_left = NodePath("../Restart")
+focus_neighbour_right = NodePath("../Restart")
 size_flags_horizontal = 3
 text = "Back"
 
 [node name="CurrentLevelContainer" type="Node" parent="."]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
 bus = "music"
 
+[node name="Sfx" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
+bus = "UI"
+
+[connection signal="timeout" from="UI/GUI/Timer" to="." method="_on_Timer_timeout"]
+[connection signal="focus_entered" from="UI/Menus/PauseMenu/VBoxContainer/VBoxContainer/Play" to="." method="_on_Play_focus_entered"]
 [connection signal="pressed" from="UI/Menus/PauseMenu/VBoxContainer/VBoxContainer/Play" to="." method="_on_Play_pressed"]
+[connection signal="focus_entered" from="UI/Menus/PauseMenu/VBoxContainer/VBoxContainer/Back" to="." method="_on_Back_focus_entered"]
 [connection signal="pressed" from="UI/Menus/PauseMenu/VBoxContainer/VBoxContainer/Back" to="." method="_on_Back_pressed"]
 [connection signal="pressed" from="UI/Menus/WinMenu/VBoxContainer/HBoxContainer/Restart" to="." method="_on_Restart_pressed"]
 [connection signal="pressed" from="UI/Menus/WinMenu/VBoxContainer/HBoxContainer/Back" to="." method="_on_Back_pressed"]

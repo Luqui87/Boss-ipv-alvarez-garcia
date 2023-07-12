@@ -20,10 +20,8 @@ func _on_Timer_timeout():
 	
 func fire():
 	var projectile: Projectile = projectile_scene.instance()
-	if !right:
-		projectile.direction = Vector2(-10, 0)
 	projectile_container.add_child(projectile)
-	projectile.set_starting_values(fire_position.global_position)
+	projectile.set_starting_values(fire_position.global_position, right)
 	projectile.connect("delete_requested", self, "_on_projectile_delete_requested")
 	$AudioStreamPlayer.play()
 	
@@ -36,5 +34,3 @@ func _on_Turret_area_entered(area):
 	if area.name == "Melee":
 		$AnimationPlayer.play("dead")
 		$Timer.stop()
-		$AudioStreamPlayer.stream = Hit
-		$AudioStreamPlayer.play()

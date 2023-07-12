@@ -8,3 +8,4 @@ func _on_Monitor_area_entered(area):
 		$Monitor/AnimationPlayer.play("activated")
 		$Door/AnimationPlayer.play("open")
 		activated = true
+		$Monitor/AudioStreamPlayer.play()

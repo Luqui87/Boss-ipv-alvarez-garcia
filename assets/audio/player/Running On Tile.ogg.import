@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Running On Tile.ogg-3fc72ff5dd2cd0633cd08e9bc06ef31d.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/player/Running On Tile.ogg"
+dest_files=[ "res://.import/Running On Tile.ogg-3fc72ff5dd2cd0633cd08e9bc06ef31d.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

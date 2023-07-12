@@ -9,6 +9,7 @@ func enter() -> void:
 	else:
 		character._play_animation("jump",false)
 		character.velocity.y = -character.jump_speed
+		var y = character.velocity.y
 		character.snap_vector = Vector2.ZERO
 		
 	
@@ -18,18 +19,21 @@ func update(delta:float) -> void:
 	character._apply_movement()
 	if character.move_direction == 0:
 		character._handle_deacceleration()
-	if character.is_near_wall():
+	if character.is_near_wall() && (character.velocity.y > -500 || character._is_animation_playing("jump")):
 		emit_signal("finished","nearWall")
+		character.emit_signal("grounded_change", true)
 	if character.is_on_floor():
+		character.emit_signal("grounded_change", true)
 		if character.move_direction != 0:
-			emit_signal("finished","move")
+			emit_signal("finished","move")	
 		else:
 			emit_signal("finished","idle")
 		
 
 func handle_input(event: InputEvent) -> void:
-	if event.is_action_pressed("attack"):
+	if event.is_action_pressed("attack") :
 		character._handle_attack()
+		
 
 func _on_animation_finished(anim_name):
 	if (anim_name == "landing"):
@@ -39,3 +43,5 @@ func handle_event(event: String, value = null) -> void:
 	match event:
 		"hit":
 			emit_signal("finished","hurt")
+		"dead":
+			emit_signal("finished","dead")

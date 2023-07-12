@@ -21,12 +21,12 @@ border_width_left = 15
 font_path = "res://assets/fonts/TrobusExpandedPersonalUse.ttf"
 
 [sub_resource type="DynamicFont" id=5]
-size = 80
+size = 60
 font_data = SubResource( 4 )
 
 [sub_resource type="DynamicFont" id=1]
-size = 40
-outline_size = 2
+size = 45
+outline_size = 4
 outline_color = Color( 0.466667, 0.0117647, 0.0117647, 1 )
 font_data = ExtResource( 1 )
 

@@ -8,10 +8,12 @@ const SLOPE_THRESHOLD: float = deg2rad(60)
 
 
 signal hit(amount)
-signal healed(amount)
 signal hp_changed(current_hp, max_hp)
+signal stateDead
 signal dead()
 signal grounded_change(is_grounded)
+signal sliding_change(is_sliding)
+
 
 onready var state_machine : Node = $StateMachine
 onready var body: Sprite = $Body
@@ -20,6 +22,7 @@ onready var floorCast1 : RayCast2D = $floorCast1
 onready var floorCast2 : RayCast2D = $floorCast2
 onready var floorCast3 : RayCast2D = $floorCast3
 onready var meleeShape: CollisionShape2D = $Body/Melee/MeleeShape
+onready var audioStream : AudioStreamPlayer = $AudioStreamPlayer
 
 
 #onready var floor_raycasts: Array = $FloorRaycasts.get_children()
@@ -31,7 +34,8 @@ onready var current_hp: int = max_hp
 export (float) var ACCELERATION:float = 30.0
 export (float) var H_SPEED_LIMIT:float = 400.0
 export (float) var jump_speed: float = 1000
-export (float) var FRICTION_WEIGHT: float = 0.1
+export (float) var FRICTION_WEIGHT: float = 0.2
+export (float) var FRICTION_WEIGHT_AIR : float = 0.1
 export (float) var gravity: float = 30
 export (Vector2) var knockback ;
 
@@ -41,6 +45,10 @@ var move_direction: int = 0
 var stop_on_slope: bool = false
 var last_direction = 1
 var attacking : bool
+
+
+var jump : AudioStream = preload("res://assets/audio/player/Jump.ogg")
+var hook_hit : AudioStream = preload("res://assets/audio/player/hook_hit.wav")
 
 func _ready() -> void:
 	state_machine._set_character(self)
@@ -64,8 +72,10 @@ func _take_damage():
 	emit_signal("hit",1)
 
 func _handle_deacceleration() -> void:
-	velocity.x = lerp(velocity.x, 0, FRICTION_WEIGHT) if abs(velocity.x) > 1 else 0
-
+	if is_on_floor():
+		velocity.x = lerp(velocity.x, 0, FRICTION_WEIGHT) if abs(velocity.x) > 1 else 0
+	else: 
+		velocity.x =  lerp(velocity.x, 0, FRICTION_WEIGHT_AIR) if abs(velocity.x) > 1 else 0
 
 func _apply_movement():
 	velocity.y += gravity
@@ -86,18 +96,6 @@ func move_and_fall(slow_fall: bool):
 
 func notify_hit(amount: int = 1) -> void:
 	emit_signal("hit", amount)
-
-
-func _handle_hit(amount: int) -> void:
-	_play_animation("hurt")
-	snap_vector = Vector2.ZERO
-	
-	velocity.y = -knockback.y
-	velocity.x = -knockback.x * last_direction
-	
-	Global.health -= 1
-	if (Global.health == 0):
-		emit_signal("dead")
 
 func _remove():
 	hide()
@@ -126,10 +124,11 @@ func handle_wall_jump():
 	elif move_direction > 0:
 		body.flip_h = false
 		
+	audioStream.stream = jump
+	audioStream.play()
 
 func _handle_dead():
-	emit_signal("dead")
-
+	emit_signal("stateDead")
 
 func _is_animation_playing(animation_name:String)->bool:
 	return body_animations.current_animation == animation_name && body_animations.is_playing()
@@ -161,9 +160,12 @@ func _on_Melee_area_entered(area):
 		velocity.y = -jump_speed
 		snap_vector = Vector2.ZERO
 		meleeShape.set_deferred("disabled", true)
+		audioStream.stream = hook_hit
+		audioStream.play()
 
 func _on_Hitbox_area_entered(area):
 	notify_hit(1)
 
 func _on_Hitbox_body_entered(body):
 	notify_hit(1)
+

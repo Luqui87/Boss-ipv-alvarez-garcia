@@ -1,5 +1,6 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
+[ext_resource path="res://assets/audio/enviroment/piston.ogg" type="AudioStream" id=1]
 [ext_resource path="res://assets/textures/enviroment/Factory/4 Animated objects/Hammer.png" type="Texture" id=2]
 
 [sub_resource type="Animation" id=21]
@@ -418,6 +419,24 @@ tracks/21/keys = {
 "update": 1,
 "values": [ Vector2( 0, -90 ), Vector2( 0, -48 ), Vector2( 0, -78 ), Vector2( 0, -104 ), Vector2( 0, -127 ) ]
 }
+tracks/22/type = "audio"
+tracks/22/path = NodePath("AudioStreamPlayer")
+tracks/22/interp = 1
+tracks/22/loop_wrap = true
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 1 )
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 1 )
+} ],
+"times": PoolRealArray( 0, 2 )
+}
 
 [sub_resource type="RectangleShape2D" id=13]
 extents = Vector2( 63, 30.5 )
@@ -459,7 +478,7 @@ position = Vector2( 0, -1 )
 scale = Vector2( 4, 5 )
 texture = ExtResource( 2 )
 hframes = 8
-frame = 7
+frame = 4
 
 [node name="HitBox" type="Area2D" parent="Hammer"]
 collision_layer = 32
@@ -485,7 +504,7 @@ position = Vector2( 475, 160 )
 scale = Vector2( 4, 5 )
 texture = ExtResource( 2 )
 hframes = 8
-frame = 4
+frame = 7
 
 [node name="HitBox" type="Area2D" parent="Hammer2"]
 collision_layer = 32
@@ -512,7 +531,7 @@ position = Vector2( 0, -1 )
 scale = Vector2( 4, 5 )
 texture = ExtResource( 2 )
 hframes = 8
-frame = 7
+frame = 4
 
 [node name="HitBox" type="Area2D" parent="Hammer3"]
 collision_layer = 32
@@ -538,7 +557,7 @@ position = Vector2( 1075, 160 )
 scale = Vector2( 4, 5 )
 texture = ExtResource( 2 )
 hframes = 8
-frame = 4
+frame = 7
 
 [node name="HitBox" type="Area2D" parent="Hammer4"]
 collision_layer = 32
@@ -565,7 +584,7 @@ position = Vector2( 1, 0 )
 scale = Vector2( 4, 5 )
 texture = ExtResource( 2 )
 hframes = 8
-frame = 7
+frame = 4
 
 [node name="HitBox" type="Area2D" parent="Hammer5"]
 collision_layer = 32
@@ -583,3 +602,7 @@ shape = SubResource( 19 )
 [node name="Rectangle5" type="CollisionShape2D" parent="Hammer5"]
 position = Vector2( 0, -48 )
 shape = SubResource( 20 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 1 )
+bus = "enviroment"

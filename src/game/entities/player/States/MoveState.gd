@@ -26,10 +26,12 @@ func handle_event(event: String, value = null) -> void:
 	match event:
 		"hit":
 			emit_signal("finished","hurt")
+		"dead":
+			emit_signal("finished","dead")
 
 func handle_input(event: InputEvent) -> void:
 	if event.is_action_pressed("attack"):
 		emit_signal("finished","idle")
 		character._handle_attack()
-	if event.is_action_pressed("jump"):
+	if event.is_action_pressed("jump") && character.is_on_floor():
 		emit_signal("finished","jump")

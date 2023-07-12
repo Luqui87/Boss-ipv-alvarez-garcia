@@ -1,7 +1,15 @@
 extends AbstractState
 
-func enter():
-	character._handle_hit(1)
+func enter():	
+	Global.health -= 1
+	if (Global.health == 0):
+		emit_signal("finished","dead")
+	else:
+		character._play_animation("hurt")
+		character.snap_vector = Vector2.ZERO
+		
+		character.velocity.y = -character.knockback.y
+		character.velocity.x = -character.knockback.x * character.last_direction
 	
 
 func update(delta:float) -> void:

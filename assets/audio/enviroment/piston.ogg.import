@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/piston.ogg-2c945c4ef2b15cc213cf22a464ad800a.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/enviroment/piston.ogg"
+dest_files=[ "res://.import/piston.ogg-2c945c4ef2b15cc213cf22a464ad800a.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

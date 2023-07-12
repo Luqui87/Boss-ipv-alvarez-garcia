@@ -7,7 +7,8 @@ func _ready() -> void:
 		"jump": $Jump,
 		"nearWall" : $NearWall,
 		"hurt" : $Hurt,
-		"slide": $Slide
+		"slide": $Slide,
+		"dead" : $Dead
 	}
 
 
@@ -17,3 +18,7 @@ func notify_hit(amount: int) -> void:
 
 func _on_Player_hit(amount):
 	current_state.handle_event("hit", amount)
+
+
+func _on_Player_stateDead():
+	current_state.handle_event("dead")

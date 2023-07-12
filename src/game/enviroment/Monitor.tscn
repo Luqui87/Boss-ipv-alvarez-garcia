@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://assets/textures/enviroment/Factory/4 Animated objects/Screen2.png" type="Texture" id=1]
 [ext_resource path="res://assets/textures/enviroment/Factory/4 Animated objects/Entry.png" type="Texture" id=2]
 [ext_resource path="res://src/game/enviroment/Monitor.gd" type="Script" id=3]
+[ext_resource path="res://assets/audio/enviroment/monitorBreakj.wav" type="AudioStream" id=4]
 
 [sub_resource type="RectangleShape2D" id=59]
 extents = Vector2( 68, 161.5 )
@@ -172,6 +173,10 @@ margin_left = -22.0
 margin_top = -46.0
 margin_right = 10.0
 margin_bottom = -15.0
-color = Color( 1, 1, 1, 0 )
+color = Color( 0.592157, 0.121569, 0.121569, 0 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Monitor"]
+stream = ExtResource( 4 )
+bus = "player"
 
 [connection signal="area_entered" from="Monitor" to="." method="_on_Monitor_area_entered"]

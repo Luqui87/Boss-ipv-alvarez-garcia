@@ -9,7 +9,7 @@ func update(delta:float) -> void:
 	character.move_and_fall(true)
 	if character.is_on_floor() :
 		emit_signal("finished", "idle")
-	elif !character.is_near_wall() && character.velocity.y > 0:
+	elif !character.is_near_wall():
 		emit_signal("finished", "move")
 
 

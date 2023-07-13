@@ -9,7 +9,7 @@ func enter():
 		character.snap_vector = Vector2.ZERO
 		
 		character.velocity.y = -character.knockback.y
-		character.velocity.x = -character.knockback.x * character.last_direction
+		character.velocity.x = -character.knockback.x * character.hit_Direction
 	
 
 func update(delta:float) -> void:

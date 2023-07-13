@@ -19,8 +19,6 @@ func update(delta):
 	elif !character.is_on_floor() && character.is_near_wall():
 			emit_signal("finished", "nearWall")
 		
-			
-
 
 func handle_event(event: String, value = null) -> void:
 	match event:

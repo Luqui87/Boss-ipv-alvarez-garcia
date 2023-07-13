@@ -7,8 +7,7 @@ const SNAP_LENGTH: float = 32.0
 const SLOPE_THRESHOLD: float = deg2rad(60)
 
 
-signal hit(amount)
-signal hp_changed(current_hp, max_hp)
+signal hit(amount, direction)
 signal stateDead
 signal dead()
 signal grounded_change(is_grounded)
@@ -17,7 +16,7 @@ signal sliding_change(is_sliding)
 
 onready var state_machine : Node = $StateMachine
 onready var body: Sprite = $Body
-onready var wall_check : RayCast2D = $WallCheck
+onready var wall_check : RayCast2D = $Body/WallCheck
 onready var floorCast1 : RayCast2D = $floorCast1
 onready var floorCast2 : RayCast2D = $floorCast2
 onready var floorCast3 : RayCast2D = $floorCast3
@@ -45,10 +44,10 @@ var move_direction: int = 0
 var stop_on_slope: bool = false
 var last_direction = 1
 var attacking : bool
-
+var hit_Direction : int = 0
 
 var jump : AudioStream = preload("res://assets/audio/player/Jump.ogg")
-var hook_hit : AudioStream = preload("res://assets/audio/player/hook_hit.wav")
+var hook_hit : AudioStream = preload("res://assets/audio/player/hook_hit2.wav")
 
 func _ready() -> void:
 	state_machine._set_character(self)
@@ -59,17 +58,15 @@ func _handle_move_input() -> void:
 	move_direction = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))
 	if move_direction != 0:
 		velocity.x = clamp(velocity.x + (move_direction * ACCELERATION), -H_SPEED_LIMIT, H_SPEED_LIMIT) + get_floor_velocity().x
-		$WallCheck.rotation_degrees = 90 * -move_direction
+#		wall_check.rotation_degrees = 90 * -move_direction
 		last_direction = move_direction
-
+	
 	if move_direction < 0:
-		body.flip_h = true
+		body.scale.x = abs(body.scale.x) * -1
 		
 	elif move_direction > 0:
-		body.flip_h = false
+		body.scale.x = abs(body.scale.x) 
 
-func _take_damage():
-	emit_signal("hit",1)
 
 func _handle_deacceleration() -> void:
 	if is_on_floor():
@@ -117,12 +114,12 @@ func handle_wall_jump():
 	velocity.y = -jump_speed
 	velocity.x = - 400 * last_direction
 	move_direction = - last_direction
-	wall_check.rotation_degrees = 90 * ( last_direction)
+	
 	if move_direction < 0:
-		body.flip_h = true
+		body.scale.x = abs(body.scale.x) * -1
 		
 	elif move_direction > 0:
-		body.flip_h = false
+		body.scale.x = abs(body.scale.x) 
 		
 	audioStream.stream = jump
 	audioStream.play()
@@ -146,8 +143,7 @@ func _handle_attack():
 		_play_animation("attack")	
 	else:
 		_play_animation("jumpAttack")
-	var meleePosition = meleeShape.position.x 
-	meleeShape.position.x = abs(meleePosition) * (last_direction)
+
 	
 
 func _on_Melee_body_entered(body):
@@ -164,8 +160,21 @@ func _on_Melee_area_entered(area):
 		audioStream.play()
 
 func _on_Hitbox_area_entered(area):
+	if area.global_position > self.global_position:
+		hit_Direction = 1
+	else:
+		hit_Direction = -1
 	notify_hit(1)
 
 func _on_Hitbox_body_entered(body):
+	if body.global_position > self.global_position:
+		hit_Direction = 1
+	else:
+		hit_Direction = -1
 	notify_hit(1)
 
+
+
+
+func _on_BodyAnimations_animation_started(anim_name):
+	$Body/Slash.hide()

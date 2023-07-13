@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/128x64_2.png-227ef1abb64a9badc3b8eb26e8a5151e.stex"
+path="res://.import/red-slash.png-da665f53bd4d85019e51b1586bd4eb3b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/enviroment/Billboards/128x64_2.png"
-dest_files=[ "res://.import/128x64_2.png-227ef1abb64a9badc3b8eb26e8a5151e.stex" ]
+source_file="res://assets/textures/entities/player/red-slash.png"
+dest_files=[ "res://.import/red-slash.png-da665f53bd4d85019e51b1586bd4eb3b.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

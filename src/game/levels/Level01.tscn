@@ -2442,7 +2442,7 @@ scale = Vector2( 1.02687, 2.02161 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 104, 576 )
-scale = Vector2( 1.7, 1.7 )
+scale = Vector2( 1.6, 1.6 )
 collision_mask = 21
 __meta__ = {
 "_edit_group_": true

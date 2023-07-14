@@ -10,7 +10,7 @@ func _on_LineEdit_text_entered(new_text):
 	for i in range(6):
 		var row = $Container/LeaderBoard.get_child(i + 1)
 		var score = Global.scoreboard[i]
-		if score[1] < 300:
+		if score[1] < 420:
 			row.get_child(0).text = score[0]
 			row.get_child(1).text = "%d:%02d" % [floor(score[1] / 60), int(score[1]) % 60]
 	

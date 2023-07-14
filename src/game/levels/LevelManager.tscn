@@ -104,7 +104,7 @@ align = 1
 valign = 1
 
 [node name="Timer" type="Timer" parent="UI/GUI"]
-wait_time = 300.0
+wait_time = 420.0
 
 [node name="FadeIn" type="Control" parent="UI/GUI"]
 anchor_left = 0.5

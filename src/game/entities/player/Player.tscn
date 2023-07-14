@@ -494,6 +494,7 @@ height = 26.6667
 scale = Vector2( 1.5, 1.5 )
 collision_layer = 2
 collision_mask = 0
+moving_platform_apply_velocity_on_leave = 2
 script = ExtResource( 2 )
 max_hp = 5
 H_SPEED_LIMIT = 600.0
@@ -532,7 +533,6 @@ scale = Vector2( 2.00187, 2.01822 )
 texture = ExtResource( 1 )
 hframes = 7
 vframes = 16
-frame = 99
 
 [node name="Melee" type="Area2D" parent="Body"]
 position = Vector2( 0.529661, 1.54824 )
@@ -550,7 +550,7 @@ position = Vector2( 0.499533, 0.990972 )
 rotation = -1.5708
 scale = Vector2( 0.495486, 0.499533 )
 enabled = true
-cast_to = Vector2( -0.666748, 22.3333 )
+cast_to = Vector2( -0.666764, 26.3333 )
 
 [node name="Slash" type="Sprite" parent="Body"]
 visible = false

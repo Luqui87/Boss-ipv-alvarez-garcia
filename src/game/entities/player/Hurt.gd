@@ -17,3 +17,7 @@ func update(delta:float) -> void:
 	if character.is_on_floor() :
 		emit_signal("finished", "idle")
 	
+func handle_event(event: String, value = null) -> void:
+	match event:
+		"dead":
+			emit_signal("finished","dead")

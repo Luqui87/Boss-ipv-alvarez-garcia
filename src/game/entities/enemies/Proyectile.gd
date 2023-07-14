@@ -6,8 +6,6 @@ onready var sprite = $Sprite
 
 export var direction: Vector2
 
-signal delete_requested(projectile)
-
 func _ready():
 	set_physics_process(false)
 	
@@ -25,10 +23,13 @@ func _physics_process(delta):
 	position += direction*speed*delta
 
 func _on_Proyectile_body_entered(body):
-	if ! body is Player:
-		emit_signal("delete_requested",self)
-
+	_remove()
+	
 
 func _on_Proyectile_area_entered(area):
 	if area.name == "Melee":
-		emit_signal("delete_requested",self)
+		_remove()
+
+func _remove() -> void:
+	get_parent().remove_child(self)
+	call_deferred("")

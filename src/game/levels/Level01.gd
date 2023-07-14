@@ -13,7 +13,8 @@ func _ready():
 	var player = get_node("Player")
 	
 	if Global.level_start:
-		Global.spawn_point = $StartPosition.global_position
+#		Global.spawn_point = $StartPosition.global_position
+		Global.spawn_point = player.global_position
 		
 	player.global_position = Global.spawn_point
 	
@@ -50,7 +51,6 @@ func on_player_dead():
 	
 
 func _on_Checkpoint3_body_entered(body):
-	Global.inFactory = true
 	emit_signal("_enter_factory")
 	emit_signal("play_music", tracks[1])
 	

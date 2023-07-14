@@ -55,7 +55,7 @@ tracks/0/keys = {
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 32, 17.25 )
 
-[node name="platform" type="StaticBody2D"]
+[node name="platform" type="KinematicBody2D"]
 scale = Vector2( 2, 2 )
 __meta__ = {
 "_edit_group_": true

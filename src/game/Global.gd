@@ -3,12 +3,11 @@ extends Node
 var level_start: bool = true
 var spawn_point :Vector2
 var paused = false
-var inFactory : bool = false
 var current_time : float 
 
 var health = 5
 
-var scoreboard = [["0",300], ["1",300], ["2",300], ["3",300], ["4",300], ["5",300]]
+var scoreboard = [["0",420], ["1",420], ["2",420], ["3",420], ["4",420], ["5",420]]
 
 func _enter_score (name: String, time: float):
 	for i in 6 :

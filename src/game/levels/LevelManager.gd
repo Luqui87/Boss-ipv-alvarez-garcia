@@ -104,7 +104,7 @@ func _on_Timer_timeout():
 	$UI/Menus/LoseMenu/VBoxContainer/HBoxContainer/Restart.grab_focus()
 	
 func on_level_finished():
-	Global.current_time = 300 - timer.time_left
+	Global.current_time = 420 - timer.time_left
 	Global.level_start = true
 	Global.health = 5
 	get_tree().change_scene("res://src/screens/Scoreboard.tscn")

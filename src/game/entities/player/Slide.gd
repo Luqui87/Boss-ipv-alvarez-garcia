@@ -3,10 +3,10 @@ extends AbstractState
 func enter():
 	character.emit_signal("sliding_change", true)
 	if character.is_sliding() == 1:
-		character.body.flip_h = false
+		character.body.scale.x = abs(character.body.scale.x) 
 		character.body.rotation_degrees = 32
 	else:
-		character.body.flip_h = true
+		character.body.scale.x = abs(character.body.scale.x) * -1
 		character.body.rotation_degrees = -32
 	character._play_animation("slide", false)
 

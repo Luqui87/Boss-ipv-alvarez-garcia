@@ -73,7 +73,8 @@ func _on_Back_pressed():
 	sfx.play()
 
 func _on_enter_factory():
-	timer.start()
+	timer.start(420)
+	timer.set_paused(false)
 	timer_label.visible = true
 	$UI/GUI/Filter/AnimationPlayer.play("show")
 	
@@ -89,9 +90,9 @@ func on_play_music(track):
 
 func _on_Restart_pressed():
 	Global.level_start = true
-	timer.stop()
 	timer_label.visible = false
 	$UI/Menus/LoseMenu.visible = false
+	$UI/GUI/Filter.hide()
 	_setup_level(0)
 	self.isPaused = false
 	sfx.stream = enter

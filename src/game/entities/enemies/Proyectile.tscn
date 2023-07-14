@@ -9,7 +9,7 @@ height = 0.0
 
 [node name="Proyectile" type="Area2D"]
 collision_layer = 40
-collision_mask = 43
+collision_mask = 11
 script = ExtResource( 2 )
 speed = 20.0
 direction = Vector2( 10, 0 )

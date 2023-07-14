@@ -4092,7 +4092,7 @@ position = Vector2( 10710, -337 )
 position = Vector2( 14759, 69 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 221, 486 )
+position = Vector2( 204.002, 539 )
 scale = Vector2( 1.6, 1.6 )
 collision_mask = 21
 __meta__ = {

@@ -27,9 +27,12 @@ func _on_Proyectile_body_entered(body):
 	
 
 func _on_Proyectile_area_entered(area):
-	if area.name == "Melee":
+	if area.name == "Hitbox":
+		yield(get_tree().create_timer(0.02), "timeout")
 		_remove()
-
+	elif area.name == "Melee":
+		_remove()
+	
 func _remove() -> void:
 	get_parent().remove_child(self)
 	call_deferred("")
